@@ -5,256 +5,267 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>eManagerAI — AI-Powered Business Management</title>
-
   <meta
     name="description"
     content="eManagerAI is an AI-powered business management platform for CRM, billing, marketing, social media, reviews, analytics and business automation."
   />
+  <meta name="theme-color" content="#091628" />
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <script>
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+            display: ["Sora", '"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+          },
           colors: {
-            primary: "#6366F1",
-            secondary: "#8B5CF6",
-            dark: "#080B14",
-            card: "#101522",
+            brand: {
+              blue: "#0d6ed9",
+              green: "#1dbb73",
+              navy: "#091628",
+              ink: "#0f1f38",
+              mist: "#f3f8ff",
+              mint: "#effaf5",
+            },
           },
           boxShadow: {
-            glow: "0 0 60px rgba(99, 102, 241, 0.18)",
-          }
-        }
-      }
+            soft: "0 18px 50px -12px rgba(9,22,40,0.14)",
+            glow: "0 30px 80px -20px rgba(13,110,217,0.35)",
+            card: "0 1px 0 rgba(9,22,40,0.03), 0 14px 34px -14px rgba(9,22,40,0.14)",
+          },
+          keyframes: {
+            floaty: {
+              "0%,100%": { transform: "translateY(0)" },
+              "50%": { transform: "translateY(-10px)" },
+            },
+            marquee: {
+              "0%": { transform: "translateX(0)" },
+              "100%": { transform: "translateX(-50%)" },
+            },
+            pulseRing: {
+              "0%": { boxShadow: "0 0 0 0 rgba(29,187,115,0.45)" },
+              "100%": { boxShadow: "0 0 0 14px rgba(29,187,115,0)" },
+            },
+          },
+          animation: {
+            floaty: "floaty 6s ease-in-out infinite",
+            "floaty-slow": "floaty 8s ease-in-out infinite",
+            marquee: "marquee 28s linear infinite",
+            ring: "pulseRing 2s ease-out infinite",
+          },
+        },
+      },
     };
   </script>
 
   <!-- AOS -->
-  <link
-    href="https://unpkg.com/aos@2.3.4/dist/aos.css"
-    rel="stylesheet"
-  />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
   <!-- Remix Icons -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
-    rel="stylesheet"
-  />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet" />
 
   <style>
     :root {
       --brand-blue: #0d6ed9;
       --brand-green: #1dbb73;
-      --brand-black: #091628;
       --brand-navy: #091628;
-      --brand-white: #ffffff;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-body,html{
-     overflow-x: hidden;
-}
+    html { scroll-behavior: smooth; }
+    html, body { overflow-x: hidden; }
+    section[id], footer[id] { scroll-margin-top: 90px; }
+
     body {
-      background: var(--brand-white);
-      color: var(--brand-black);
-     
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      color: var(--brand-navy);
+      background: #ffffff;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .hero-grid {
-      background-image:
-        linear-gradient(rgba(13,110,217,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(13,110,217,0.04) 1px, transparent 1px);
-      background-size: 45px 45px;
-    }
+    ::selection { background: rgba(29,187,115,0.25); }
 
+    /* ---------- Brand helpers ---------- */
     .gradient-text {
-      background: linear-gradient(90deg, var(--brand-blue) 0%, var(--brand-green) 55%, var(--brand-black) 100%);
+      background: linear-gradient(95deg, var(--brand-blue) 0%, var(--brand-green) 100%);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+    .gradient-text-light {
+      background: linear-gradient(95deg, #6db3ff 0%, #4ee0a0 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
     }
 
     .brand-button {
-      background: linear-gradient(135deg, var(--brand-blue), var(--brand-green), var(--brand-black));
-      color: #ffffff;
-      box-shadow: 0 18px 35px rgba(13, 110, 217, 0.22);
+      background: linear-gradient(120deg, var(--brand-blue) 0%, #0ea5a4 55%, var(--brand-green) 100%);
+      color: #fff;
+      box-shadow: 0 16px 34px -10px rgba(13,110,217,0.55);
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+    .brand-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 40px -10px rgba(13,110,217,0.6);
+      filter: saturate(1.08);
     }
 
-    .brand-card {
-      background: linear-gradient(135deg, rgba(255,255,255,1), rgba(219,247,233,0.9), rgba(219,233,255,0.9));
-      border: 1px solid rgba(9,22,40,0.08);
-      box-shadow: 0 14px 28px rgba(9,22,40,0.04);
+    .ghost-button {
+      background: #fff;
+      border: 1px solid rgba(9,22,40,0.12);
+      color: var(--brand-navy);
+      transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
     }
-
-    .brand-card-dark {
-      background: linear-gradient(135deg, var(--brand-black), #123a6d 45%, var(--brand-blue));
-      border: 1px solid rgba(255,255,255,0.08);
-      color: #ffffff;
-      box-shadow: 0 18px 35px rgba(9,22,40,0.12);
-    }
-
-    .soft-section {
-      background: linear-gradient(180deg, rgba(239,255,247,0.92), rgba(255,255,255,1) 35%, rgba(233,243,255,0.9));
-      border-top: 1px solid rgba(9,22,40,0.06);
-      border-bottom: 1px solid rgba(9,22,40,0.06);
-    }
-
-    .soft-panel {
-      background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(220,247,234,0.8), rgba(215,233,255,0.75));
-      border: 1px solid rgba(13,110,217,0.08);
-      box-shadow: 0 18px 40px rgba(13,110,217,0.08);
-    }
-
-    .brand-card,
-    .brand-card * {
-      color: var(--brand-black);
-    }
-
-    .brand-card-dark,
-    .brand-card-dark * {
-      color: #ffffff;
-    }
-
-    .brand-card-dark [class*="text-gray-"],
-    .brand-card-dark [class*="text-slate-"],
-    .brand-card-dark [class*="text-zinc-"] {
-      color: rgba(255,255,255,0.82) !important;
-    }
-
-    section, footer, header, nav, main {
-      background-color: #ffffff !important;
-    }
-
-    body [class*="text-gray-"],
-    body [class*="text-slate-"],
-    body [class*="text-zinc-"] {
-      color: #111827 !important;
-    }
-
-    body [class*="border-white/"] {
-      border-color: rgba(9, 22, 40, 0.12) !important;
-    }
-
-    .gradient-border {
-      position: relative;
-      background: #101522;
-      border-radius: 20px;
-    }
-
-    .gradient-border::before {
-      content: "";
-      position: absolute;
-      inset: -1px;
-      border-radius: 21px;
-      padding: 1px;
-      background: linear-gradient(
-        135deg,
-        rgba(99,102,241,.6),
-        transparent,
-        rgba(168,85,247,.5)
-      );
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
+    .ghost-button:hover {
+      border-color: var(--brand-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px -12px rgba(13,110,217,0.4);
     }
 
     .glass {
-      background: rgba(255, 255, 255, 0.94);
+      background: rgba(255,255,255,0.82);
       backdrop-filter: blur(18px);
-      border: 1px solid rgba(9, 22, 40, 0.08);
-      box-shadow: 0 12px 30px rgba(9, 22, 40, 0.08);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(9,22,40,0.06);
+      transition: box-shadow .3s ease, background .3s ease;
+    }
+    .glass.scrolled {
+      background: rgba(255,255,255,0.94);
+      box-shadow: 0 10px 30px -18px rgba(9,22,40,0.35);
     }
 
+    /* ---------- Hero backdrop ---------- */
+    .hero-bg {
+      background:
+        radial-gradient(60% 55% at 85% 8%, rgba(13,110,217,0.16), transparent 70%),
+        radial-gradient(50% 50% at 5% 30%, rgba(29,187,115,0.14), transparent 70%),
+        linear-gradient(180deg, #f6fbff 0%, #ffffff 85%);
+    }
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(9,22,40,0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(9,22,40,0.045) 1px, transparent 1px);
+      background-size: 48px 48px;
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 100%);
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 100%);
+    }
+
+    /* ---------- Cards ---------- */
+    .bento {
+      position: relative;
+      background: #fff;
+      border: 1px solid rgba(9,22,40,0.08);
+      box-shadow: 0 14px 34px -18px rgba(9,22,40,0.18);
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+      overflow: hidden;
+    }
+    .bento:hover {
+      transform: translateY(-5px);
+      border-color: rgba(13,110,217,0.35);
+      box-shadow: 0 30px 60px -24px rgba(13,110,217,0.35);
+    }
+    .bento::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(29,187,115,0.10), transparent 45%);
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+    .bento:hover::after { opacity: 1; }
+
+    .navy-panel {
+      background:
+        radial-gradient(60% 80% at 100% 0%, rgba(13,110,217,0.55), transparent 60%),
+        radial-gradient(50% 70% at 0% 100%, rgba(29,187,115,0.28), transparent 60%),
+        var(--brand-navy);
+      color: #fff;
+    }
+
+    .price-featured {
+      background:
+        radial-gradient(70% 60% at 100% 0%, rgba(13,110,217,0.6), transparent 65%),
+        radial-gradient(60% 60% at 0% 100%, rgba(29,187,115,0.35), transparent 65%),
+        var(--brand-navy);
+      color: #fff;
+      box-shadow: 0 40px 80px -30px rgba(13,110,217,0.6);
+    }
+
+    /* ---------- FAQ ---------- */
     .faq-content {
-      display: none;
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .35s ease;
+    }
+    .faq-content > div { overflow: hidden; min-height: 0; }
+    .faq-item.open .faq-content { grid-template-rows: 1fr; }
+    .faq-item.open { border-color: rgba(13,110,217,0.35); box-shadow: 0 18px 40px -22px rgba(13,110,217,0.4); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--brand-blue); color: #fff; }
+    .faq-icon { transition: transform .3s ease, background .3s ease, color .3s ease; }
+
+    /* ---------- Misc ---------- */
+    .dot-pattern {
+      background-image: radial-gradient(rgba(255,255,255,0.14) 1px, transparent 1px);
+      background-size: 22px 22px;
     }
 
-    .faq-content.active {
-      display: block;
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: 2px solid var(--brand-blue);
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .animate-floaty, .animate-floaty-slow, .animate-marquee, .animate-ring { animation: none !important; }
     }
   </style>
 </head>
 
-<body class="bg-white text-slate-900 antialiased">
+<body class="antialiased">
 
   <!-- =====================================================
        NAVBAR
   ====================================================== -->
-
   <header class="fixed top-0 left-0 right-0 z-50">
-    <nav class="glass">
+    <nav id="nav" class="glass" aria-label="Main navigation">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="h-20 flex items-center justify-between">
+        <div class="h-[72px] sm:h-20 flex items-center justify-between">
 
-          <!-- Logo -->
           <a href="#" class="flex items-center" aria-label="eManagerAI home">
-            <img
-              src="images/logo.jpeg"
-              alt="eManagerAI logo"
-              class="h-12 sm:h-14 w-auto object-contain"
-            />
+            <img src="images/logo.jpeg" alt="eManagerAI logo" class="h-11 sm:h-14 w-auto object-contain" />
           </a>
 
-          <!-- Desktop Menu -->
-          <div class="hidden lg:flex items-center gap-8">
-
-            <a href="#features"
-              class="text-sm text-gray-300  transition">
-              Features
-            </a>
-
-            <a href="#solutions"
-              class="text-sm text-gray-300  transition">
-              Solutions
-            </a>
-
-            <a href="#how-it-works"
-              class="text-sm text-gray-300  transition">
-              How It Works
-            </a>
-
-            <a href="#pricing"
-              class="text-sm text-gray-300  transition">
-              Pricing
-            </a>
-
-            <a href="#faq"
-              class="text-sm text-gray-300  transition">
-              FAQ
-            </a>
-
+          <div class="hidden lg:flex items-center gap-1 text-sm font-medium">
+            <a href="#" class="px-4 py-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-brand-mist transition">Home</a>
+            <a href="#features" class="px-4 py-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-brand-mist transition">Features</a>
+            <a href="#solutions" class="px-4 py-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-brand-mist transition">Solutions</a>
+            <a href="#industries" class="px-4 py-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-brand-mist transition">Industries</a>
+            <a href="#pricing" class="px-4 py-2 rounded-lg text-slate-600 hover:text-brand-blue hover:bg-brand-mist transition">Pricing</a>
+           
           </div>
 
-          <!-- Desktop CTA -->
-          <div class="hidden md:flex items-center gap-4">
-
-            <a
-              href="#"
-              class="text-sm text-gray-600 hover:text-[var(--brand-blue)] transition"
-            >
-              Login
+          <div class="hidden md:flex items-center">
+            <a href="tel:+919702053758" class="brand-button inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-semibold">
+              <i class="ri-phone-fill"></i> Get in touch
             </a>
-
-            <a
-              href="#contact"
-              class="brand-button px-5 py-2.5 rounded-xl text-sm font-semibold transition"
-            >
-              Get Started
-            </a>
-
           </div>
 
           <!-- Mobile Button -->
-          <button
-            id="menuBtn"
-            class="lg:hidden text-2xl"
-          >
+          <button id="menuBtn" class="lg:hidden h-11 w-11 rounded-xl border border-slate-200 bg-white text-2xl flex items-center justify-center" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
             <i class="ri-menu-3-line"></i>
           </button>
 
@@ -262,1378 +273,960 @@ body,html{
       </div>
 
       <!-- Mobile Menu -->
-      <div
-        id="mobileMenu"
-        class="hidden lg:hidden border-t border-white/10"
-      >
-        <div class="px-5 py-5 flex flex-col gap-5">
-
-          <a href="#features" class="mobile-link text-gray-300">
-            Features
-          </a>
-
-          <a href="#solutions" class="mobile-link text-gray-300">
-            Solutions
-          </a>
-
-          <a href="#how-it-works" class="mobile-link text-gray-300">
-            How It Works
-          </a>
-
-          <a href="#pricing" class="mobile-link text-gray-300">
-            Pricing
-          </a>
-
-          <a href="#faq" class="mobile-link text-gray-300">
-            FAQ
-          </a>
-
-          <a
-            href="#contact"
-            class="mobile-link text-center bg-white text-gray-900 rounded-xl py-3 font-semibold"
-          >
-            Get Started
-          </a>
-
+      <div id="mobileMenu" class="hidden lg:hidden border-t border-slate-100 bg-white">
+        <div class="px-5 py-5 flex flex-col gap-1">
+          <a href="#" class="mobile-link px-3 py-3 rounded-lg font-medium text-slate-700 hover:bg-brand-mist">Home</a>
+          <a href="#features" class="mobile-link px-3 py-3 rounded-lg font-medium text-slate-700 hover:bg-brand-mist">Features</a>
+          <a href="#solutions" class="mobile-link px-3 py-3 rounded-lg font-medium text-slate-700 hover:bg-brand-mist">Solutions</a>
+          <a href="#industries" class="mobile-link px-3 py-3 rounded-lg font-medium text-slate-700 hover:bg-brand-mist">Industries</a>
+          <a href="#pricing" class="mobile-link px-3 py-3 rounded-lg font-medium text-slate-700 hover:bg-brand-mist">Pricing</a>
+       
+          <div class="mt-3">
+            <a href="tel:+919702053758" class="mobile-link brand-button flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-semibold">
+              <i class="ri-phone-fill"></i> Get in touch
+            </a>
+          </div>
         </div>
       </div>
-
     </nav>
   </header>
 
 
-  <!-- =====================================================
-       HERO
-  ====================================================== -->
-
   <main>
 
-    <section
-      class="relative min-h-screen pt-32 pb-20 overflow-hidden hero-grid"
-    >
-
-      <!-- Background Glow -->
-      <div
-        class="absolute top-32 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-indigo-600/20 blur-[140px] rounded-full"
-      ></div>
-
-      <div
-        class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-purple-600/10 blur-[120px] rounded-full"
-      ></div>
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+    <section class="relative pt-32 sm:pt-36 pb-20 lg:pb-28 overflow-hidden hero-bg">
+      <div class="hero-grid absolute inset-0"></div>
 
       <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-14 items-center">
 
-        <div class="max-w-4xl mx-auto text-center">
+          <!-- Copy -->
+          <div class="lg:col-span-6 text-center lg:text-left">
 
-          <!-- Badge -->
-          <div
-            data-aos="fade-down"
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-indigo-400/20 bg-indigo-400/10 text-indigo-300 text-sm mb-7"
-          >
-            <span class="h-2 w-2 bg-green-400 rounded-full"></span>
-            AI-powered business management
+            <div data-aos="fade-down" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-card text-sm font-medium text-slate-700">
+              <span class="relative flex h-2.5 w-2.5">
+                <span class="absolute inline-flex h-full w-full rounded-full bg-brand-green animate-ring"></span>
+                <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-brand-green"></span>
+              </span>
+              AI-powered business management
+            </div>
+
+            <h1 data-aos="fade-up" data-aos-delay="80" class="font-display mt-6 text-[2.5rem] leading-[1.08] sm:text-6xl lg:text-[4.1rem] font-bold tracking-tight text-brand-navy">
+              Run your business
+              <span class="gradient-text">smarter with AI.</span>
+            </h1>
+
+            <p data-aos="fade-up" data-aos-delay="160" class="mt-6 text-base sm:text-lg text-slate-600 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+              eManagerAI brings CRM, billing, marketing, social media, reviews, analytics and intelligent automation into one powerful platform built for modern businesses.
+            </p>
+
+            <div data-aos="fade-up" data-aos-delay="240" class="mt-9 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+             <a href="https://wa.me/919702053758?text=Enquiry%20from%20website" target="_blank" class="brand-button w-full sm:w-auto px-8 py-4 rounded-2xl font-semibold text-center">
+  Get Started Now
+  <i class="ri-arrow-right-line ml-1"></i>
+</a>
+              <a href="#features" class="ghost-button w-full sm:w-auto px-8 py-4 rounded-2xl font-semibold text-center">
+                <i class="ri-play-circle-line mr-1 text-brand-blue"></i> Explore Features
+              </a>
+            </div>
+
+            <div data-aos="fade-up" data-aos-delay="320" class="mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-3 text-sm text-slate-600">
+              <span class="inline-flex items-center gap-2"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>No complicated setup</span>
+              <span class="inline-flex items-center gap-2"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Built for MSMEs</span>
+              <span class="inline-flex items-center gap-2"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>AI-powered</span>
+            </div>
           </div>
 
-          <!-- Heading -->
-          <h2
-            data-aos="fade-up"
-            class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight"
-          >
-            Run Your Business
-            <span class="gradient-text">
-              Smarter With AI.
-            </span>
-          </h2>
+          <!-- Dashboard mockup -->
+          <div class="lg:col-span-6 relative" data-aos="fade-left" data-aos-delay="200">
 
-          <!-- Description -->
-          <p
-            data-aos="fade-up"
-            data-aos-delay="100"
-            class="mt-6 text-base sm:text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed"
-          >
-            eManagerAI brings CRM, billing, marketing, social media,
-            reviews, analytics and intelligent automation into one powerful
-            platform built for modern businesses.
-          </p>
+            <div class="absolute -inset-6 bg-gradient-to-tr from-brand-blue/20 via-transparent to-brand-green/25 blur-3xl rounded-[3rem]"></div>
 
-          <!-- Buttons -->
-          <div
-            data-aos="fade-up"
-            data-aos-delay="200"
-            class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
+            <div class="relative rounded-3xl bg-white border border-slate-200 shadow-glow overflow-hidden">
 
-            <a
-              href="#contact"
-              class="brand-button w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold hover:opacity-90 transition"
-            >
-              Start Growing With AI
-              <i class="ri-arrow-right-line ml-1"></i>
-            </a>
-
-            <a
-              href="#features"
-              class="w-full sm:w-auto px-7 py-3.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition font-medium"
-            >
-              Explore Features
-            </a>
-
-          </div>
-
-          <!-- Small Trust -->
-          <div
-            data-aos="fade-up"
-            data-aos-delay="300"
-            class="mt-7 flex flex-wrap items-center justify-center gap-5 text-sm text-gray-500"
-          >
-            <span>
-              <i class="ri-check-line text-green-400"></i>
-              No complicated setup
-            </span>
-
-            <span>
-              <i class="ri-check-line text-green-400"></i>
-              Built for MSMEs
-            </span>
-
-            <span>
-              <i class="ri-check-line text-green-400"></i>
-              AI-powered
-            </span>
-          </div>
-
-        </div>
-
-
-        <!-- Dashboard Preview -->
-        <div
-          data-aos="fade-up"
-          data-aos-delay="350"
-          class="mt-16 max-w-6xl mx-auto"
-        >
-
-          <div class="gradient-border p-2">
-
-            <div class="rounded-2xl overflow-hidden bg-white">
-
-              <!-- Browser Top -->
-              <div class="h-12 px-5 border-b border-white/10 flex items-center justify-between">
-
-                <div class="flex gap-2">
-                  <span class="h-3 w-3 rounded-full bg-red-400/70"></span>
-                  <span class="h-3 w-3 rounded-full bg-yellow-400/70"></span>
-                  <span class="h-3 w-3 rounded-full bg-green-400/70"></span>
+              <!-- Browser bar -->
+              <div class="h-11 px-4 border-b border-slate-100 bg-slate-50/80 flex items-center justify-between">
+                <div class="flex gap-1.5">
+                  <span class="h-2.5 w-2.5 rounded-full bg-red-400"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-yellow-400"></span>
+                  <span class="h-2.5 w-2.5 rounded-full bg-green-400"></span>
                 </div>
-
-                <div class="hidden sm:block text-xs text-gray-600">
-                  app.emanagerai.com/dashboard
+                <div class="text-[11px] text-slate-500 bg-white border border-slate-200 rounded-md px-3 py-1">
+                  <i class="ri-lock-line text-brand-green"></i> app.emanagerai.com/dashboard
                 </div>
-
-                <i class="ri-more-2-fill text-gray-500"></i>
-
+                <i class="ri-more-2-fill text-slate-400"></i>
               </div>
 
-
-              <div class="flex min-h-[420px]">
-
+              <div class="flex">
                 <!-- Sidebar -->
-                <aside class="hidden md:block w-56 border-r border-white/10 p-4">
-
-                  <div class="flex items-center gap-2 px-2 mb-7">
-                    <div class="h-8 w-8 rounded-lg bg-indigo-500 flex items-center justify-center">
-                      <i class="ri-sparkling-fill text-sm"></i>
+                <aside class="hidden sm:block w-40 shrink-0 border-r border-slate-100 p-3 text-[13px]">
+                  <div class="flex items-center gap-2 px-2 mb-5">
+                    <div class="h-7 w-7 rounded-lg brand-button flex items-center justify-center">
+                      <i class="ri-sparkling-fill text-xs"></i>
                     </div>
-                    <span class="font-semibold text-sm">eManagerAI</span>
+                    <span class="font-display font-semibold">eManagerAI</span>
                   </div>
-
-                  <div class="space-y-1 text-sm">
-
-                    <div class="px-3 py-2.5 rounded-lg bg-indigo-500/15 text-indigo-300">
-                      <i class="ri-dashboard-line mr-2"></i>
-                      Dashboard
-                    </div>
-
-                    <div class="px-3 py-2.5 text-gray-500">
-                      <i class="ri-user-line mr-2"></i>
-                      Customers
-                    </div>
-
-                    <div class="px-3 py-2.5 text-gray-500">
-                      <i class="ri-file-list-3-line mr-2"></i>
-                      Invoices
-                    </div>
-
-                    <div class="px-3 py-2.5 text-gray-500">
-                      <i class="ri-megaphone-line mr-2"></i>
-                      Marketing
-                    </div>
-
-                    <div class="px-3 py-2.5 text-gray-500">
-                      <i class="ri-star-line mr-2"></i>
-                      Reviews
-                    </div>
-
-                    <div class="px-3 py-2.5 text-gray-500">
-                      <i class="ri-bar-chart-line mr-2"></i>
-                      Analytics
-                    </div>
-
+                  <div class="space-y-1">
+                    <div class="px-3 py-2 rounded-lg bg-brand-blue/10 text-brand-blue font-semibold"><i class="ri-dashboard-line mr-2"></i>Dashboard</div>
+                    <div class="px-3 py-2 text-slate-500"><i class="ri-user-line mr-2"></i>Customers</div>
+                    <div class="px-3 py-2 text-slate-500"><i class="ri-file-list-3-line mr-2"></i>Invoices</div>
+                    <div class="px-3 py-2 text-slate-500"><i class="ri-megaphone-line mr-2"></i>Marketing</div>
+                    <div class="px-3 py-2 text-slate-500"><i class="ri-star-line mr-2"></i>Reviews</div>
+                    <div class="px-3 py-2 text-slate-500"><i class="ri-bar-chart-line mr-2"></i>Analytics</div>
                   </div>
-
                 </aside>
 
+                <!-- Main -->
+                <div class="flex-1 min-w-0 p-4 sm:p-5">
 
-                <!-- Dashboard -->
-                <div class="flex-1 p-5 sm:p-7">
-
-                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
-
+                  <div class="flex items-center justify-between gap-3">
                     <div>
-                      <p class="text-xs text-gray-500">Tuesday, September 1</p>
-                      <h3 class="text-xl font-semibold mt-1">
-                        Good morning 👋
-                      </h3>
+                      <p class="text-[11px] text-slate-500">Tuesday, September 1</p>
+                      <h3 class="font-display text-lg font-semibold mt-0.5">Good morning 👋</h3>
                     </div>
-
-                    <button class="px-4 py-2 rounded-lg bg-indigo-500 text-xs font-medium">
-                      + Create Invoice
-                    </button>
-
+                    <button class="brand-button px-3.5 py-2 rounded-lg text-[11px] font-semibold whitespace-nowrap">+ Create Invoice</button>
                   </div>
 
-
-                  <!-- Stats -->
-                  <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-
-                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5">
-                      <div class="flex justify-between">
-                        <i class="ri-money-rupee-circle-line text-indigo-400"></i>
-                        <span class="text-xs text-green-400">+18%</span>
+                  <div class="mt-4 grid grid-cols-2 gap-3">
+                    <div class="p-3.5 rounded-2xl bg-brand-mist border border-brand-blue/10">
+                      <div class="flex items-center justify-between">
+                        <i class="ri-money-rupee-circle-line text-brand-blue text-lg"></i>
+                        <span class="text-[11px] font-semibold text-brand-green">+18%</span>
                       </div>
-                      <p class="text-xs text-gray-500 mt-4">Revenue</p>
-                      <h4 class="text-lg font-semibold mt-1">₹2.48L</h4>
+                      <p class="text-[11px] text-slate-500 mt-3">Revenue</p>
+                      <h4 class="font-display text-lg font-semibold">₹2.48L</h4>
                     </div>
-
-                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5">
-                      <div class="flex justify-between">
-                        <i class="ri-user-3-line text-purple-400"></i>
-                        <span class="text-xs text-green-400">+12%</span>
+                    <div class="p-3.5 rounded-2xl bg-brand-mint border border-brand-green/15">
+                      <div class="flex items-center justify-between">
+                        <i class="ri-user-3-line text-brand-green text-lg"></i>
+                        <span class="text-[11px] font-semibold text-brand-green">+12%</span>
                       </div>
-                      <p class="text-xs text-gray-500 mt-4">Customers</p>
-                      <h4 class="text-lg font-semibold mt-1">1,284</h4>
+                      <p class="text-[11px] text-slate-500 mt-3">Customers</p>
+                      <h4 class="font-display text-lg font-semibold">1,284</h4>
                     </div>
-
-                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5">
-                      <div class="flex justify-between">
-                        <i class="ri-file-list-line text-blue-400"></i>
-                        <span class="text-xs text-green-400">+9%</span>
-                      </div>
-                      <p class="text-xs text-gray-500 mt-4">Invoices</p>
-                      <h4 class="text-lg font-semibold mt-1">428</h4>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-white/[0.03] border border-white/5">
-                      <div class="flex justify-between">
-                        <i class="ri-line-chart-line text-green-400"></i>
-                        <span class="text-xs text-green-400">+24%</span>
-                      </div>
-                      <p class="text-xs text-gray-500 mt-4">Growth</p>
-                      <h4 class="text-lg font-semibold mt-1">24.8%</h4>
-                    </div>
-
                   </div>
 
-
-                  <!-- Chart -->
-                  <div class="mt-4 grid lg:grid-cols-3 gap-4">
-
-                    <div class="lg:col-span-2 p-5 rounded-xl bg-white/[0.03] border border-white/5">
-
-                      <div class="flex justify-between items-center">
-                        <div>
-                          <p class="text-sm font-medium">Revenue Overview</p>
-                          <p class="text-xs text-gray-600 mt-1">
-                            Monthly performance
-                          </p>
-                        </div>
-
-                        <span class="text-xs text-gray-500">
-                          Last 6 months
-                        </span>
+                  <div class="mt-3 p-4 rounded-2xl border border-slate-100 bg-white">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <p class="text-xs font-semibold">Revenue overview</p>
+                        <p class="text-[11px] text-slate-500">Last 6 months</p>
                       </div>
-
-                      <div class="mt-7 flex items-end gap-3 h-40">
-
-                        <div class="flex-1 rounded-t bg-indigo-500/30 h-[40%]"></div>
-                        <div class="flex-1 rounded-t bg-indigo-500/40 h-[55%]"></div>
-                        <div class="flex-1 rounded-t bg-indigo-500/50 h-[48%]"></div>
-                        <div class="flex-1 rounded-t bg-indigo-500/60 h-[70%]"></div>
-                        <div class="flex-1 rounded-t bg-indigo-500/70 h-[64%]"></div>
-                        <div class="flex-1 rounded-t bg-indigo-500 h-[90%]"></div>
-
-                      </div>
-
+                      <span class="text-[11px] px-2 py-1 rounded-md bg-brand-mint text-brand-green font-semibold">Growing</span>
                     </div>
-
-
-                    <!-- AI Assistant -->
-                    <div class="p-5 rounded-xl bg-gradient-to-br from-indigo-500/15 to-purple-500/10 border border-indigo-400/10">
-
-                      <div class="flex items-center gap-2">
-
-                        <div class="h-9 w-9 rounded-lg bg-indigo-500 flex items-center justify-center">
-                          <i class="ri-sparkling-2-fill"></i>
-                        </div>
-
-                        <div>
-                          <p class="text-sm font-semibold">AI Assistant</p>
-                          <p class="text-[10px] text-gray-500">
-                            Business insight
-                          </p>
-                        </div>
-
-                      </div>
-
-                      <p class="text-xs text-gray-400 mt-5 leading-relaxed">
-                        Your revenue is up 18% this month. Customer
-                        retention has also improved compared with last month.
-                      </p>
-
-                      <button class="mt-5 text-xs text-indigo-300">
-                        View AI insights
-                        <i class="ri-arrow-right-line"></i>
-                      </button>
-
+                    <div class="mt-4 flex items-end gap-2.5 h-28">
+                      <div class="flex-1 rounded-t-md bg-brand-blue/20 h-[38%]"></div>
+                      <div class="flex-1 rounded-t-md bg-brand-blue/30 h-[54%]"></div>
+                      <div class="flex-1 rounded-t-md bg-brand-blue/40 h-[46%]"></div>
+                      <div class="flex-1 rounded-t-md bg-brand-blue/60 h-[70%]"></div>
+                      <div class="flex-1 rounded-t-md bg-brand-blue/80 h-[64%]"></div>
+                      <div class="flex-1 rounded-t-md bg-gradient-to-t from-brand-blue to-brand-green h-[92%]"></div>
                     </div>
-
                   </div>
 
                 </div>
-
               </div>
+            </div>
 
+            <!-- Floating chips -->
+            <div class="hidden sm:flex absolute -left-6 top-24 animate-floaty items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-soft border border-slate-100">
+              <div class="h-10 w-10 rounded-xl bg-brand-mint text-brand-green flex items-center justify-center text-xl"><i class="ri-checkbox-circle-fill"></i></div>
+              <div>
+                <p class="text-xs font-semibold">Invoice paid</p>
+                <p class="text-[11px] text-slate-500">₹18,500 received</p>
+              </div>
+            </div>
+
+            <div class="hidden sm:flex absolute -right-4 bottom-12 animate-floaty-slow items-center gap-3 bg-white rounded-2xl px-4 py-3 shadow-soft border border-slate-100">
+              <div class="h-10 w-10 rounded-xl bg-yellow-50 text-yellow-500 flex items-center justify-center text-xl"><i class="ri-star-fill"></i></div>
+              <div>
+                <p class="text-xs font-semibold">AI replied to a 5★ review</p>
+                <p class="text-[11px] text-slate-500">Just now</p>
+              </div>
             </div>
 
           </div>
-
         </div>
-
       </div>
-
     </section>
 
 
     <!-- =====================================================
-         STATS
+         STATS BAND
     ====================================================== -->
-
-    <section class="border-y border-white/5 bg-white/[0.015]">
-
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-
+    <section class="navy-panel relative">
+      <div class="dot-pattern absolute inset-0 opacity-60"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-y-9 gap-x-6 text-center">
           <div data-aos="fade-up">
-            <h3 class="text-3xl font-bold">10+</h3>
-            <p class="text-sm text-gray-500 mt-2">Business Tools</p>
+            <h3 class="font-display text-4xl font-bold gradient-text-light">10+</h3>
+            <p class="text-sm text-white/70 mt-2">Business tools</p>
           </div>
-
           <div data-aos="fade-up" data-aos-delay="100">
-            <h3 class="text-3xl font-bold">AI</h3>
-            <p class="text-sm text-gray-500 mt-2">Powered Automation</p>
+            <h3 class="font-display text-4xl font-bold gradient-text-light">AI</h3>
+            <p class="text-sm text-white/70 mt-2">Powered automation</p>
           </div>
-
           <div data-aos="fade-up" data-aos-delay="200">
-            <h3 class="text-3xl font-bold">24/7</h3>
-            <p class="text-sm text-gray-500 mt-2">Business Support</p>
+            <h3 class="font-display text-4xl font-bold gradient-text-light">24/7</h3>
+            <p class="text-sm text-white/70 mt-2">Business support</p>
           </div>
-
           <div data-aos="fade-up" data-aos-delay="300">
-            <h3 class="text-3xl font-bold">1</h3>
-            <p class="text-sm text-gray-500 mt-2">Unified Platform</p>
+            <h3 class="font-display text-4xl font-bold gradient-text-light">1</h3>
+            <p class="text-sm text-white/70 mt-2">Unified platform</p>
           </div>
-
         </div>
-
       </div>
-
     </section>
 
 
     <!-- =====================================================
-         FEATURES
+         FEATURES (BENTO)
     ====================================================== -->
-
-    <section id="features" class="py-24">
-
+    <section id="features" class="py-24 lg:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div
-          data-aos="fade-up"
-          class="max-w-2xl"
-        >
-
-          <span class="text-sm text-indigo-400 font-medium">
-            EVERYTHING CONNECTED
+        <div data-aos="fade-up" class="max-w-2xl">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-mist text-brand-blue text-sm font-semibold">
+            <i class="ri-links-line"></i> Everything connected
           </span>
-
-          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4">
-            One platform for your
-            <span class="gradient-text">entire business.</span>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-5 leading-tight">
+            One platform for your <span class="gradient-text">entire business.</span>
           </h2>
-
-          <p class="text-gray-400 mt-5 leading-relaxed">
-            Stop switching between different tools. eManagerAI connects
-            the essential parts of your business into one intelligent
-            workspace.
+          <p class="text-slate-600 mt-5 leading-relaxed text-lg">
+            Stop switching between different tools. eManagerAI connects the essential parts of your business into one intelligent workspace.
           </p>
-
         </div>
 
+        <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
 
-        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- CRM (wide) -->
+          <div data-aos="fade-up" class="bento rounded-3xl p-7 lg:col-span-2">
+            <div class="grid sm:grid-cols-2 gap-8 items-center">
+              <div>
+                <div class="h-12 w-12 rounded-2xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-2xl">
+                  <i class="ri-user-search-line"></i>
+                </div>
+                <h3 class="font-display text-xl font-semibold mt-6">AI CRM</h3>
+                <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                  Manage customers, leads, conversations and follow-ups from one intelligent CRM.
+                </p>
+                <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue mt-6 group">
+                  Explore CRM <i class="ri-arrow-right-line transition group-hover:translate-x-1"></i>
+                </a>
+              </div>
 
-          <!-- Card -->
-          <div
-            data-aos="fade-up"
-            class="brand-card p-7 group hover:-translate-y-1 transition duration-300 rounded-2xl"
-          >
-
-            <div class="h-12 w-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl">
-              <i class="ri-user-search-line"></i>
+              <!-- mini pipeline -->
+              <div class="rounded-2xl bg-brand-mist border border-brand-blue/10 p-4 space-y-2.5">
+                <div class="flex items-center justify-between text-[11px] font-semibold text-slate-500 px-1">
+                  <span>Lead pipeline</span><span>This week</span>
+                </div>
+                <div class="flex items-center gap-3 bg-white rounded-xl px-3 py-2.5 shadow-sm">
+                  <div class="h-8 w-8 rounded-full bg-brand-blue/15 text-brand-blue text-xs font-bold flex items-center justify-center">RS</div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs font-semibold truncate">Rohit Sharma</p>
+                    <p class="text-[11px] text-slate-500">Follow-up today</p>
+                  </div>
+                  <span class="text-[10px] px-2 py-1 rounded-md bg-brand-mint text-brand-green font-semibold">Hot</span>
+                </div>
+                <div class="flex items-center gap-3 bg-white rounded-xl px-3 py-2.5 shadow-sm">
+                  <div class="h-8 w-8 rounded-full bg-brand-green/15 text-brand-green text-xs font-bold flex items-center justify-center">AK</div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs font-semibold truncate">Anjali Kapoor</p>
+                    <p class="text-[11px] text-slate-500">Quote sent</p>
+                  </div>
+                  <span class="text-[10px] px-2 py-1 rounded-md bg-brand-blue/10 text-brand-blue font-semibold">Warm</span>
+                </div>
+                <div class="flex items-center gap-3 bg-white rounded-xl px-3 py-2.5 shadow-sm">
+                  <div class="h-8 w-8 rounded-full bg-slate-200 text-slate-600 text-xs font-bold flex items-center justify-center">MV</div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-xs font-semibold truncate">Mehta Ventures</p>
+                    <p class="text-[11px] text-slate-500">New enquiry</p>
+                  </div>
+                  <span class="text-[10px] px-2 py-1 rounded-md bg-slate-100 text-slate-600 font-semibold">New</span>
+                </div>
+              </div>
             </div>
-
-            <h3 class="text-xl font-semibold mt-6">
-              AI CRM
-            </h3>
-
-            <p class="text-sm mt-3 leading-relaxed">
-              Manage customers, leads, conversations and follow-ups
-              from one intelligent CRM.
-            </p>
-
-            <a href="#" class="inline-flex items-center gap-2 text-sm text-indigo-400 mt-6">
-              Explore CRM
-              <i class="ri-arrow-right-line"></i>
-            </a>
-
           </div>
 
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="100"
-            class="brand-card p-7 group hover:-translate-y-1 transition duration-300 rounded-2xl"
-          >
-
-            <div class="h-12 w-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl">
+          <!-- Billing -->
+          <div data-aos="fade-up" data-aos-delay="100" class="bento rounded-3xl p-7">
+            <div class="h-12 w-12 rounded-2xl bg-brand-green/10 text-brand-green flex items-center justify-center text-2xl">
               <i class="ri-file-list-3-line"></i>
             </div>
-
-            <h3 class="text-xl font-semibold mt-6">
-              Smart Billing
-            </h3>
-
-            <p class="text-gray-500 text-sm mt-3 leading-relaxed">
-              Create professional invoices, manage payments and
-              keep track of outstanding balances.
+            <h3 class="font-display text-xl font-semibold mt-6">Smart Billing</h3>
+            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+              Create professional invoices, manage payments and keep track of outstanding balances.
             </p>
-
-            <a href="#" class="inline-flex items-center gap-2 text-sm text-purple-400 mt-6">
-              Explore Billing
-              <i class="ri-arrow-right-line"></i>
+            <div class="mt-5 rounded-2xl border border-dashed border-slate-200 p-3.5 flex items-center justify-between">
+              <div>
+                <p class="text-[11px] text-slate-500">INV-0428</p>
+                <p class="text-sm font-semibold">₹18,500</p>
+              </div>
+              <span class="text-[11px] px-2.5 py-1 rounded-full bg-brand-mint text-brand-green font-semibold">Paid</span>
+            </div>
+            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-green mt-6 group">
+              Explore Billing <i class="ri-arrow-right-line transition group-hover:translate-x-1"></i>
             </a>
-
           </div>
 
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="200"
-            class="brand-card p-7 group hover:-translate-y-1 transition duration-300 rounded-2xl"
-          >
-
-            <div class="h-12 w-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-2xl">
+          <!-- Social -->
+          <div data-aos="fade-up" class="bento rounded-3xl p-7">
+            <div class="h-12 w-12 rounded-2xl bg-pink-500/10 text-pink-500 flex items-center justify-center text-2xl">
               <i class="ri-instagram-line"></i>
             </div>
-
-            <h3 class="text-xl font-semibold mt-6">
-              Social Automation
-            </h3>
-
-            <p class="text-sm mt-3 leading-relaxed">
-              Generate content and keep your social media active
-              without spending hours every day.
+            <h3 class="font-display text-xl font-semibold mt-6">Social Automation</h3>
+            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+              Generate content and keep your social media active without spending hours every day.
             </p>
-
-            <a href="#" class="inline-flex items-center gap-2 text-sm text-pink-400 mt-6">
-              Explore Marketing
-              <i class="ri-arrow-right-line"></i>
+            <div class="mt-5 grid grid-cols-7 gap-1.5">
+              <div class="h-9 rounded-lg bg-brand-blue/15"></div>
+              <div class="h-9 rounded-lg bg-brand-green/25"></div>
+              <div class="h-9 rounded-lg bg-slate-100"></div>
+              <div class="h-9 rounded-lg bg-brand-blue/25"></div>
+              <div class="h-9 rounded-lg bg-slate-100"></div>
+              <div class="h-9 rounded-lg bg-brand-green/35"></div>
+              <div class="h-9 rounded-lg bg-brand-blue/35"></div>
+            </div>
+            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-pink-500 mt-6 group">
+              Explore Marketing <i class="ri-arrow-right-line transition group-hover:translate-x-1"></i>
             </a>
-
           </div>
 
-
-          <div
-            data-aos="fade-up"
-            class="brand-card p-7 group hover:-translate-y-1 transition duration-300 rounded-2xl"
-          >
-
-            <div class="h-12 w-12 rounded-xl bg-red-500/10 text-red-400 flex items-center justify-center text-2xl">
+          <!-- Google -->
+          <div data-aos="fade-up" data-aos-delay="100" class="bento rounded-3xl p-7">
+            <div class="h-12 w-12 rounded-2xl bg-red-500/10 text-red-500 flex items-center justify-center text-2xl">
               <i class="ri-google-line"></i>
             </div>
-
-            <h3 class="text-xl font-semibold mt-6">
-              Google Business
-            </h3>
-
-            <p class="text-sm mt-3 leading-relaxed">
-              Manage your Google Business presence, updates and
-              customer interactions from one place.
+            <h3 class="font-display text-xl font-semibold mt-6">Google Business</h3>
+            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+              Manage your Google Business presence, updates and customer interactions from one place.
             </p>
-
-            <a href="#" class="inline-flex items-center gap-2 text-sm text-red-400 mt-6">
-              Explore Google Tools
-              <i class="ri-arrow-right-line"></i>
+            <div class="mt-5 flex flex-wrap gap-2 text-[11px] font-semibold">
+              <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600"><i class="ri-map-pin-line"></i> Listing</span>
+              <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600"><i class="ri-image-line"></i> Posts</span>
+              <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600"><i class="ri-chat-3-line"></i> Q&amp;A</span>
+            </div>
+            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-red-500 mt-6 group">
+              Explore Google Tools <i class="ri-arrow-right-line transition group-hover:translate-x-1"></i>
             </a>
-
           </div>
 
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="100"
-            class="brand-card p-7 group hover:-translate-y-1 transition duration-300 rounded-2xl"
-          >
-
-            <div class="h-12 w-12 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-2xl">
+          <!-- Reviews -->
+          <div data-aos="fade-up" data-aos-delay="200" class="bento rounded-3xl p-7">
+            <div class="h-12 w-12 rounded-2xl bg-yellow-500/10 text-yellow-500 flex items-center justify-center text-2xl">
               <i class="ri-star-smile-line"></i>
             </div>
-
-            <h3 class="text-xl font-semibold mt-6">
-              Review Management
-            </h3>
-
-            <p class="text-sm mt-3 leading-relaxed">
-              Respond to customer reviews faster with personalized
-              AI-generated replies.
+            <h3 class="font-display text-xl font-semibold mt-6">Review Management</h3>
+            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+              Respond to customer reviews faster with personalized AI-generated replies.
             </p>
-
-            <a href="#" class="inline-flex items-center gap-2 text-sm text-yellow-400 mt-6">
-              Explore Reviews
-              <i class="ri-arrow-right-line"></i>
+            <div class="mt-5 rounded-2xl bg-yellow-50/70 border border-yellow-100 p-3.5">
+              <div class="text-yellow-400 text-sm">★★★★★</div>
+              <p class="text-[11px] text-slate-600 mt-1.5 leading-relaxed">AI reply drafted: "Thank you so much! We're glad you loved it."</p>
+            </div>
+            <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-yellow-600 mt-6 group">
+              Explore Reviews <i class="ri-arrow-right-line transition group-hover:translate-x-1"></i>
             </a>
-
           </div>
 
-
-          <div
-            data-aos="fade-up"
-            data-aos-delay="200"
-            class="brand-card p-7 group hover:-translate-y-1 transition duration-300 rounded-2xl"
-          >
-
-            <div class="h-12 w-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center text-2xl">
-              <i class="ri-bar-chart-box-line"></i>
+          <!-- Analytics (wide) -->
+          <div data-aos="fade-up" class="bento rounded-3xl p-7 lg:col-span-2">
+            <div class="grid sm:grid-cols-2 gap-8 items-center">
+              <div>
+                <div class="h-12 w-12 rounded-2xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-2xl">
+                  <i class="ri-bar-chart-box-line"></i>
+                </div>
+                <h3 class="font-display text-xl font-semibold mt-6">Business Analytics</h3>
+                <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+                  Turn your business data into meaningful insights and better decisions.
+                </p>
+                <a href="#contact" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue mt-6 group">
+                  Explore Analytics <i class="ri-arrow-right-line transition group-hover:translate-x-1"></i>
+                </a>
+              </div>
+              <div class="rounded-2xl bg-brand-mist border border-brand-blue/10 p-4">
+                <div class="flex items-end gap-2 h-24">
+                  <div class="flex-1 rounded-t bg-brand-blue/25 h-[35%]"></div>
+                  <div class="flex-1 rounded-t bg-brand-blue/35 h-[52%]"></div>
+                  <div class="flex-1 rounded-t bg-brand-blue/45 h-[44%]"></div>
+                  <div class="flex-1 rounded-t bg-brand-blue/60 h-[68%]"></div>
+                  <div class="flex-1 rounded-t bg-brand-blue/80 h-[60%]"></div>
+                  <div class="flex-1 rounded-t bg-gradient-to-t from-brand-blue to-brand-green h-[95%]"></div>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-3">Sales trend · last 6 months</p>
+              </div>
             </div>
+          </div>
 
-            <h3 class="text-xl font-semibold mt-6">
-              Business Analytics
-            </h3>
-
-            <p class="text-sm mt-3 leading-relaxed">
-              Turn your business data into meaningful insights
-              and better decisions.
-            </p>
-
-            <a href="#" class="inline-flex items-center gap-2 text-sm text-green-400 mt-6">
-              Explore Analytics
-              <i class="ri-arrow-right-line"></i>
+          <!-- More -->
+          <div data-aos="fade-up" data-aos-delay="100" class="rounded-3xl p-7 navy-panel relative overflow-hidden flex flex-col justify-between min-h-[240px]">
+            <div class="dot-pattern absolute inset-0 opacity-50"></div>
+            <div class="relative">
+              <div class="h-12 w-12 rounded-2xl bg-white/10 text-white flex items-center justify-center text-2xl">
+                <i class="ri-flashlight-line"></i>
+              </div>
+              <h3 class="font-display text-xl font-semibold mt-6">And a lot more</h3>
+              <p class="text-sm text-white/70 mt-3 leading-relaxed">
+                Automation, team tools and custom integrations that grow with your business.
+              </p>
+            </div>
+            <a href="https://wa.me/919702053758?text=Enquiry%20from%20website" target="_blank" rel="noopener" class="relative inline-flex items-center gap-2 text-sm font-semibold text-white mt-6 group">
+              Talk to us <i class="ri-arrow-right-line transition group-hover:translate-x-1"></i>
             </a>
-
           </div>
 
         </div>
-
       </div>
-
     </section>
 
 
     <!-- =====================================================
          AI SECTION
     ====================================================== -->
-
-    <section
-      id="solutions"
-      class="soft-section py-24"
-    >
-
+    <section id="solutions" class="pb-24 lg:pb-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="grid lg:grid-cols-2 gap-14 items-center">
+        <div class="navy-panel relative rounded-[2rem] overflow-hidden">
+          <div class="dot-pattern absolute inset-0 opacity-50"></div>
 
-          <div data-aos="fade-right">
+          <div class="relative grid lg:grid-cols-2 gap-12 items-center p-7 sm:p-12 lg:p-16">
 
-            <span class="text-sm text-indigo-600 font-medium">
-              YOUR AI BUSINESS ASSISTANT
-            </span>
-
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mt-4 leading-tight text-slate-900">
-              Don't just manage your business.
-              <span class="gradient-text">
-                Understand it.
+            <div data-aos="fade-right">
+              <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-white/90 text-sm font-semibold border border-white/10">
+                <i class="ri-sparkling-2-fill text-brand-green"></i> Your AI business assistant
               </span>
-            </h2>
 
-            <p class="text-slate-700 mt-6 leading-relaxed">
-              eManagerAI analyzes your business data and helps you
-              understand what is happening, what needs attention and
-              where your next opportunity may be.
-            </p>
+              <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-5 leading-tight">
+                Don't just manage your business.
+                <span class="gradient-text-light">Understand it.</span>
+              </h2>
 
-            <div class="mt-8 space-y-4">
+              <p class="text-white/70 mt-6 leading-relaxed text-lg">
+                eManagerAI analyzes your business data and helps you understand what is happening, what needs attention and where your next opportunity may be.
+              </p>
 
-              <div class="flex gap-4">
-                <div class="h-9 w-9 shrink-0 rounded-lg bg-indigo-500/10 text-indigo-600 flex items-center justify-center">
-                  <i class="ri-lightbulb-line"></i>
+              <div class="mt-9 space-y-5">
+                <div class="flex gap-4">
+                  <div class="h-11 w-11 shrink-0 rounded-xl bg-white/10 text-brand-green flex items-center justify-center text-xl"><i class="ri-lightbulb-line"></i></div>
+                  <div>
+                    <h4 class="font-semibold">Actionable insights</h4>
+                    <p class="text-sm text-white/65 mt-1">Understand your business performance quickly.</p>
+                  </div>
                 </div>
-
-                <div>
-                  <h4 class="font-medium text-slate-900">Actionable Insights</h4>
-                  <p class="text-sm text-slate-600 mt-1">
-                    Understand your business performance quickly.
-                  </p>
+                <div class="flex gap-4">
+                  <div class="h-11 w-11 shrink-0 rounded-xl bg-white/10 text-[#6db3ff] flex items-center justify-center text-xl"><i class="ri-magic-line"></i></div>
+                  <div>
+                    <h4 class="font-semibold">AI recommendations</h4>
+                    <p class="text-sm text-white/65 mt-1">Get intelligent suggestions based on your data.</p>
+                  </div>
                 </div>
-              </div>
-
-              <div class="flex gap-4">
-                <div class="h-9 w-9 shrink-0 rounded-lg bg-purple-500/10 text-purple-600 flex items-center justify-center">
-                  <i class="ri-magic-line"></i>
-                </div>
-
-                <div>
-                  <h4 class="font-medium text-slate-900">AI Recommendations</h4>
-                  <p class="text-sm text-slate-600 mt-1">
-                    Get intelligent suggestions based on your data.
-                  </p>
+                <div class="flex gap-4">
+                  <div class="h-11 w-11 shrink-0 rounded-xl bg-white/10 text-brand-green flex items-center justify-center text-xl"><i class="ri-time-line"></i></div>
+                  <div>
+                    <h4 class="font-semibold">Save time</h4>
+                    <p class="text-sm text-white/65 mt-1">Automate repetitive business tasks.</p>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              <div class="flex gap-4">
-                <div class="h-9 w-9 shrink-0 rounded-lg bg-green-500/10 text-green-600 flex items-center justify-center">
-                  <i class="ri-time-line"></i>
+            <!-- Chat -->
+            <div data-aos="fade-left" class="relative">
+              <div class="rounded-3xl bg-white text-brand-navy p-5 sm:p-6 shadow-2xl">
+
+                <div class="flex items-center gap-3 pb-4 border-b border-slate-100">
+                  <div class="h-11 w-11 rounded-xl brand-button flex items-center justify-center text-lg">
+                    <i class="ri-sparkling-2-fill"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-display font-semibold">eManager AI</h3>
+                    <p class="text-xs text-brand-green font-medium">● Online</p>
+                  </div>
                 </div>
 
-                <div>
-                  <h4 class="font-medium text-slate-900">Save Time</h4>
-                  <p class="text-sm text-slate-600 mt-1">
-                    Automate repetitive business tasks.
-                  </p>
+                <div class="py-5 space-y-4">
+                  <div class="flex justify-end">
+                    <div class="max-w-[85%] px-4 py-3 rounded-2xl rounded-br-md brand-button text-sm">
+                      How is my business performing this month?
+                    </div>
+                  </div>
+
+                  <div class="flex gap-3">
+                    <div class="h-8 w-8 shrink-0 rounded-lg bg-brand-blue/10 text-brand-blue flex items-center justify-center">
+                      <i class="ri-sparkling-fill text-sm"></i>
+                    </div>
+                    <div class="max-w-[88%] px-4 py-3 rounded-2xl rounded-bl-md bg-brand-mist border border-brand-blue/10 text-sm text-slate-700 leading-relaxed">
+                      Your business is performing well. Revenue has increased compared to last month and your customer base is growing steadily.
+                    </div>
+                  </div>
+
+                  <div class="ml-11 p-4 rounded-2xl bg-brand-mint border border-brand-green/20">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs text-slate-500 font-medium">AI insight</span>
+                      <span class="text-xs text-brand-green font-bold">Positive</span>
+                    </div>
+                    <p class="text-sm mt-2 text-slate-700">
+                      Customer retention is one of your strongest growth indicators this month.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2 pb-4">
+                  <span class="text-[11px] px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 font-medium">Show unpaid invoices</span>
+                  <span class="text-[11px] px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 font-medium">Draft a social post</span>
+                  <span class="text-[11px] px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 font-medium">Reply to reviews</span>
+                </div>
+
+                <div class="flex gap-2">
+                  <input type="text" placeholder="Ask your AI assistant..." aria-label="Ask your AI assistant"
+                    class="flex-1 min-w-0 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-brand-blue" />
+                  <button class="h-11 w-11 shrink-0 rounded-xl brand-button flex items-center justify-center" aria-label="Send">
+                    <i class="ri-send-plane-fill"></i>
+                  </button>
                 </div>
               </div>
-
             </div>
 
           </div>
-
-
-          <!-- AI Chat -->
-          <div data-aos="fade-left">
-
-            <div class="soft-panel p-5 sm:p-7 rounded-3xl">
-
-              <div class="flex items-center gap-3 pb-5 border-b border-slate-200">
-
-                <div class="h-11 w-11 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white">
-                  <i class="ri-sparkling-2-fill"></i>
-                </div>
-
-                <div>
-                  <h3 class="font-semibold text-slate-900">eManager AI</h3>
-                  <p class="text-xs text-green-600">
-                    ● Online
-                  </p>
-                </div>
-
-              </div>
-
-
-              <div class="py-6 space-y-5 text-slate-900">
-
-                <div class="flex justify-end">
-                  <div class="max-w-[85%] px-4 py-3 rounded-2xl rounded-br-sm bg-gradient-to-r from-indigo-500 to-purple-500 text-sm text-white">
-                    How is my business performing this month?
-                  </div>
-                </div>
-
-                <div class="flex gap-3">
-
-                  <div class="h-8 w-8 shrink-0 rounded-lg bg-indigo-500/15 text-indigo-700 flex items-center justify-center">
-                    <i class="ri-sparkling-fill text-sm"></i>
-                  </div>
-
-                  <div class="max-w-[85%] px-4 py-3 rounded-2xl rounded-bl-sm bg-white/80 border border-slate-200 text-sm text-slate-700 leading-relaxed shadow-sm">
-                    Your business is performing well. Revenue has
-                    increased compared to last month and your
-                    customer base is growing steadily.
-                  </div>
-
-                </div>
-
-                <div class="p-4 rounded-xl bg-white/70 border border-slate-200 shadow-sm">
-
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs text-slate-500">
-                      AI Insight
-                    </span>
-
-                    <span class="text-xs text-green-600 font-semibold">
-                      Positive
-                    </span>
-                  </div>
-
-                  <p class="text-sm mt-3 text-slate-700">
-                    Customer retention is one of your strongest
-                    growth indicators this month.
-                  </p>
-
-                </div>
-
-              </div>
-
-
-              <div class="flex gap-2">
-
-                <input
-                  type="text"
-                  placeholder="Ask your AI assistant..."
-                  class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-indigo-500"
-                />
-
-                <button
-                  class="h-11 w-11 shrink-0 rounded-xl bg-indigo-500 flex items-center justify-center"
-                >
-                  <i class="ri-send-plane-fill"></i>
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
-
         </div>
-
       </div>
-
     </section>
 
 
     <!-- =====================================================
          HOW IT WORKS
     ====================================================== -->
-
-    <section id="how-it-works" class="py-24">
-
+    <section id="how-it-works" class="py-24 lg:py-28 bg-gradient-to-b from-brand-mist/70 to-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
-
-          <span class="text-sm text-indigo-400 font-medium">
-            SIMPLE BY DESIGN
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-brand-blue text-sm font-semibold shadow-card">
+            <i class="ri-route-line"></i> Simple by design
           </span>
-
-          <h2 class="text-3xl sm:text-4xl font-bold mt-4">
-            Get started in
-            <span class="gradient-text">three simple steps.</span>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-5 leading-tight">
+            Get started in <span class="gradient-text">three simple steps.</span>
           </h2>
-
-          <p class="text-gray-400 mt-5">
-            No complicated implementation. Start managing your business
-            smarter with a simple setup.
+          <p class="text-slate-600 mt-5 text-lg">
+            No complicated implementation. Start managing your business smarter with a simple setup.
           </p>
-
         </div>
 
-
-        <div class="mt-14 grid md:grid-cols-3 gap-8">
+        <div class="relative mt-16 grid md:grid-cols-3 gap-8">
+          <div class="hidden md:block absolute top-10 left-[16%] right-[16%] border-t-2 border-dashed border-brand-blue/25"></div>
 
           <div data-aos="fade-up" class="relative text-center">
-
-            <div class="h-16 w-16 mx-auto rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl">
+            <div class="relative z-10 h-20 w-20 mx-auto rounded-3xl bg-white border border-slate-200 shadow-soft text-brand-blue flex items-center justify-center text-3xl">
               <i class="ri-user-add-line"></i>
+              <span class="absolute -top-2 -right-2 h-7 w-7 rounded-full brand-button text-xs font-bold flex items-center justify-center">1</span>
             </div>
-
-            <span class="block text-xs text-indigo-400 mt-6">
-              STEP 01
-            </span>
-
-            <h3 class="text-xl font-semibold mt-2">
-              Create Your Account
-            </h3>
-
-            <p class="text-gray-500 text-sm mt-3 leading-relaxed">
-              Set up your business profile and configure the tools
-              you need.
+            <h3 class="font-display text-xl font-semibold mt-6">Create your account</h3>
+            <p class="text-slate-600 text-sm mt-3 leading-relaxed max-w-xs mx-auto">
+              Set up your business profile and configure the tools you need.
             </p>
-
           </div>
 
-
-          <div data-aos="fade-up" data-aos-delay="100" class="relative text-center">
-
-            <div class="h-16 w-16 mx-auto rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl">
+          <div data-aos="fade-up" data-aos-delay="120" class="relative text-center">
+            <div class="relative z-10 h-20 w-20 mx-auto rounded-3xl bg-white border border-slate-200 shadow-soft text-brand-green flex items-center justify-center text-3xl">
               <i class="ri-links-line"></i>
+              <span class="absolute -top-2 -right-2 h-7 w-7 rounded-full brand-button text-xs font-bold flex items-center justify-center">2</span>
             </div>
-
-            <span class="block text-xs text-purple-400 mt-6">
-              STEP 02
-            </span>
-
-            <h3 class="text-xl font-semibold mt-2">
-              Connect Your Tools
-            </h3>
-
-            <p class="text-gray-500 text-sm mt-3 leading-relaxed">
-              Connect your business data, social accounts and
-              other supported services.
+            <h3 class="font-display text-xl font-semibold mt-6">Connect your tools</h3>
+            <p class="text-slate-600 text-sm mt-3 leading-relaxed max-w-xs mx-auto">
+              Connect your business data, social accounts and other supported services.
             </p>
-
           </div>
 
-
-          <div data-aos="fade-up" data-aos-delay="200" class="relative text-center">
-
-            <div class="h-16 w-16 mx-auto rounded-2xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-2xl">
+          <div data-aos="fade-up" data-aos-delay="240" class="relative text-center">
+            <div class="relative z-10 h-20 w-20 mx-auto rounded-3xl bg-white border border-slate-200 shadow-soft text-brand-blue flex items-center justify-center text-3xl">
               <i class="ri-rocket-2-line"></i>
+              <span class="absolute -top-2 -right-2 h-7 w-7 rounded-full brand-button text-xs font-bold flex items-center justify-center">3</span>
             </div>
-
-            <span class="block text-xs text-pink-400 mt-6">
-              STEP 03
-            </span>
-
-            <h3 class="text-xl font-semibold mt-2">
-              Let AI Work
-            </h3>
-
-            <p class="text-gray-500 text-sm mt-3 leading-relaxed">
-              Automate repetitive tasks and use AI-powered insights
-              to grow your business.
+            <h3 class="font-display text-xl font-semibold mt-6">Let AI work</h3>
+            <p class="text-slate-600 text-sm mt-3 leading-relaxed max-w-xs mx-auto">
+              Automate repetitive tasks and use AI-powered insights to grow your business.
             </p>
-
           </div>
-
         </div>
 
       </div>
-
     </section>
 
 
     <!-- =====================================================
          INDUSTRIES
     ====================================================== -->
-
-    <section class="py-24 bg-white/[0.02] border-y border-white/5">
-
+    <section id="industries" class="py-20 lg:py-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
-
-          <span class="text-sm text-indigo-400 font-medium">
-            BUILT FOR BUSINESS
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-mint text-brand-green text-sm font-semibold">
+            <i class="ri-building-4-line"></i> Built for business
           </span>
-
-          <h2 class="text-3xl sm:text-4xl font-bold mt-4">
-            Designed for businesses
-            <span class="gradient-text">of all kinds.</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold mt-5">
+            Designed for businesses <span class="gradient-text">of all kinds.</span>
           </h2>
-
         </div>
 
-
-        <div class="mt-14 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-
-          <div data-aos="fade-up" class="p-5 rounded-xl border border-white/5 bg-white/[0.02] text-center hover:bg-white/5 transition">
-            <i class="ri-store-2-line text-2xl text-indigo-400"></i>
-            <p class="text-sm mt-3">Retail</p>
+        <div class="mt-12 flex flex-wrap justify-center gap-4">
+          <div data-aos="zoom-in" class="bento rounded-2xl p-6 text-center w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.7rem)] lg:w-[calc(20%-0.8rem)]">
+            <div class="h-12 w-12 mx-auto rounded-2xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-2xl"><i class="ri-store-2-line"></i></div>
+            <p class="text-sm font-semibold mt-4">Retail</p>
           </div>
-
-          <div data-aos="fade-up" data-aos-delay="50" class="p-5 rounded-xl border border-white/5 bg-white/[0.02] text-center hover:bg-white/5 transition">
-            <i class="ri-building-line text-2xl text-purple-400"></i>
-            <p class="text-sm mt-3">Agencies</p>
+          <div data-aos="zoom-in" data-aos-delay="60" class="bento rounded-2xl p-6 text-center w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.7rem)] lg:w-[calc(20%-0.8rem)]">
+            <div class="h-12 w-12 mx-auto rounded-2xl bg-brand-green/10 text-brand-green flex items-center justify-center text-2xl"><i class="ri-building-line"></i></div>
+            <p class="text-sm font-semibold mt-4">Agencies</p>
           </div>
-
-          <div data-aos="fade-up" data-aos-delay="100" class="p-5 rounded-xl border border-white/5 bg-white/[0.02] text-center hover:bg-white/5 transition">
-            <i class="ri-service-line text-2xl text-pink-400"></i>
-            <p class="text-sm mt-3">Services</p>
+          <div data-aos="zoom-in" data-aos-delay="120" class="bento rounded-2xl p-6 text-center w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.7rem)] lg:w-[calc(20%-0.8rem)]">
+            <div class="h-12 w-12 mx-auto rounded-2xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-2xl"><i class="ri-service-line"></i></div>
+            <p class="text-sm font-semibold mt-4">Services</p>
           </div>
-
-          <div data-aos="fade-up" data-aos-delay="150" class="p-5 rounded-xl border border-white/5 bg-white/[0.02] text-center hover:bg-white/5 transition">
-            <i class="ri-hospital-line text-2xl text-green-400"></i>
-            <p class="text-sm mt-3">Healthcare</p>
+          <div data-aos="zoom-in" data-aos-delay="180" class="bento rounded-2xl p-6 text-center w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.7rem)] lg:w-[calc(20%-0.8rem)]">
+            <div class="h-12 w-12 mx-auto rounded-2xl bg-brand-green/10 text-brand-green flex items-center justify-center text-2xl"><i class="ri-hospital-line"></i></div>
+            <p class="text-sm font-semibold mt-4">Healthcare</p>
           </div>
-
-          <div data-aos="fade-up" data-aos-delay="200" class="p-5 rounded-xl border border-white/5 bg-white/[0.02] text-center hover:bg-white/5 transition">
-            <i class="ri-briefcase-4-line text-2xl text-yellow-400"></i>
-            <p class="text-sm mt-3">Professionals</p>
-          </div>
-
-          <div data-aos="fade-up" data-aos-delay="250" class="p-5 rounded-xl border border-white/5 bg-white/[0.02] text-center hover:bg-white/5 transition">
-            <i class="ri-more-line text-2xl text-blue-400"></i>
-            <p class="text-sm mt-3">More</p>
+          <div data-aos="zoom-in" data-aos-delay="240" class="bento rounded-2xl p-6 text-center w-[calc(50%-0.5rem)] sm:w-[calc(33.333%-0.7rem)] lg:w-[calc(20%-0.8rem)]">
+            <div class="h-12 w-12 mx-auto rounded-2xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-2xl"><i class="ri-briefcase-4-line"></i></div>
+            <p class="text-sm font-semibold mt-4">Professionals</p>
           </div>
 
         </div>
 
       </div>
-
     </section>
 
 
     <!-- =====================================================
          PRICING
     ====================================================== -->
-
-    <section id="pricing" class="py-24">
-
+    <section id="pricing" class="py-24 lg:py-28 bg-gradient-to-b from-white via-brand-mist/60 to-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
-
-          <span class="text-sm text-indigo-400 font-medium">
-            SIMPLE PRICING
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-brand-blue text-sm font-semibold shadow-card">
+            <i class="ri-price-tag-3-line"></i> Simple pricing
           </span>
-
-          <h2 class="text-3xl sm:text-4xl font-bold mt-4">
-            Plans that grow with
-            <span class="gradient-text">your business.</span>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-5 leading-tight">
+            Plans that grow with <span class="gradient-text">your business.</span>
           </h2>
-
-          <p class="text-gray-400 mt-5">
-            Choose a plan that fits your business today and upgrade
-            whenever you are ready.
+          <p class="text-slate-600 mt-5 text-lg">
+            Choose a plan that fits your business today and upgrade whenever you are ready.
           </p>
-
         </div>
 
-
-        <div class="mt-14 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="mt-16 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
 
           <!-- Starter -->
-          <div
-            data-aos="fade-up"
-            class="brand-card p-7 rounded-2xl"
-          >
+          <div data-aos="fade-up" class="bento rounded-3xl p-8 flex flex-col">
+            <p class="text-sm font-semibold text-slate-500">Starter</p>
+            <h3 class="font-display text-4xl font-bold mt-4">₹999<span class="text-sm text-slate-500 font-medium">/month</span></h3>
+            <p class="text-sm text-slate-600 mt-3">For small businesses getting started.</p>
 
-            <p class="text-sm text-gray-400">Starter</p>
+            <a href="#contact" class="ghost-button block text-center mt-7 rounded-xl py-3 text-sm font-semibold">Get Started</a>
 
-            <h3 class="text-3xl font-bold mt-4">
-              ₹999
-              <span class="text-sm text-gray-500 font-normal">/month</span>
-            </h3>
-
-            <p class="text-sm text-gray-500 mt-3">
-              For small businesses getting started.
-            </p>
-
-            <a
-              href="#contact"
-              class="block text-center mt-7 border border-white/10 rounded-xl py-3 text-sm font-medium hover:bg-white/5 transition"
-            >
-              Get Started
-            </a>
-
-            <div class="mt-7 space-y-4 text-sm text-gray-400">
-
-              <p><i class="ri-check-line text-green-400 mr-2"></i>CRM</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Basic Billing</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Customer Management</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Basic Analytics</p>
-
-            </div>
-
+            <ul class="mt-7 space-y-4 text-sm text-slate-700">
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>CRM</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Basic Billing</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Customer Management</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Basic Analytics</li>
+            </ul>
           </div>
-
 
           <!-- Growth -->
-          <div
-            data-aos="fade-up"
-            data-aos-delay="100"
-            class="brand-card-dark relative p-7 rounded-2xl shadow-glow"
-          >
-
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-indigo-500 text-xs font-semibold">
-              MOST POPULAR
+          <div data-aos="fade-up" data-aos-delay="100" class="price-featured relative rounded-3xl p-8 flex flex-col md:-my-4">
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full brand-button text-xs font-bold whitespace-nowrap">
+              <i class="ri-fire-fill"></i> Most popular
             </div>
 
-            <p class="text-sm text-indigo-300">Growth</p>
+            <p class="text-sm font-semibold text-[#6db3ff]">Growth</p>
+            <h3 class="font-display text-4xl font-bold mt-4">₹1,999<span class="text-sm text-white/60 font-medium">/month</span></h3>
+            <p class="text-sm text-white/70 mt-3">For growing businesses ready to automate.</p>
 
-            <h3 class="text-3xl font-bold mt-4">
-              ₹1,999
-              <span class="text-sm text-gray-500 font-normal">/month</span>
-            </h3>
+            <a href="#contact" class="brand-button block text-center mt-7 rounded-xl py-3 text-sm font-semibold">Start Growing</a>
 
-            <p class="text-sm text-gray-500 mt-3">
-              For growing businesses ready to automate.
-            </p>
-
-            <a
-              href="#contact"
-              class="brand-button block text-center mt-7 rounded-xl py-3 text-sm font-semibold transition"
-            >
-              Start Growing
-            </a>
-
-            <div class="mt-7 space-y-4 text-sm text-gray-400">
-
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Everything in Starter</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>AI Assistant</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Social Automation</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Review Management</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Advanced Analytics</p>
-
-            </div>
-
+            <ul class="mt-7 space-y-4 text-sm text-white/90">
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Everything in Starter</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>AI Assistant</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Social Automation</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Review Management</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Advanced Analytics</li>
+            </ul>
           </div>
 
-
           <!-- Business -->
-          <div
-            data-aos="fade-up"
-            data-aos-delay="200"
-            class="brand-card p-7 rounded-2xl"
-          >
+          <div data-aos="fade-up" data-aos-delay="200" class="bento rounded-3xl p-8 flex flex-col">
+            <p class="text-sm font-semibold text-slate-500">Business</p>
+            <h3 class="font-display text-4xl font-bold mt-4">₹3,999<span class="text-sm text-slate-500 font-medium">/month</span></h3>
+            <p class="text-sm text-slate-600 mt-3">For established teams and larger operations.</p>
 
-            <p class="text-sm text-gray-400">Business</p>
+            <a href="#contact" class="ghost-button block text-center mt-7 rounded-xl py-3 text-sm font-semibold">Contact Sales</a>
 
-            <h3 class="text-3xl font-bold mt-4">
-              ₹3,999
-              <span class="text-sm text-gray-500 font-normal">/month</span>
-            </h3>
-
-            <p class="text-sm text-gray-500 mt-3">
-              For established teams and larger operations.
-            </p>
-
-            <a
-              href="#contact"
-              class="block text-center mt-7 border border-white/10 rounded-xl py-3 text-sm font-medium hover:bg-white/5 transition"
-            >
-              Contact Sales
-            </a>
-
-            <div class="mt-7 space-y-4 text-sm text-gray-400">
-
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Everything in Growth</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Advanced AI</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Team Management</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Priority Support</p>
-              <p><i class="ri-check-line text-green-400 mr-2"></i>Custom Integrations</p>
-
-            </div>
-
+            <ul class="mt-7 space-y-4 text-sm text-slate-700">
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Everything in Growth</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Advanced AI</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Team Management</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Priority Support</li>
+              <li class="flex gap-3"><i class="ri-checkbox-circle-fill text-brand-green text-lg"></i>Custom Integrations</li>
+            </ul>
           </div>
 
         </div>
-
       </div>
-
     </section>
 
 
     <!-- =====================================================
          TESTIMONIALS
     ====================================================== -->
-
-    <section class="py-24 bg-white/[0.02] border-y border-white/5">
-
+    <section class="py-24 lg:py-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="text-center" data-aos="fade-up">
-
-          <span class="text-sm text-indigo-400 font-medium">
-            CUSTOMER STORIES
+        <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-mint text-brand-green text-sm font-semibold">
+            <i class="ri-chat-heart-line"></i> Customer stories
           </span>
-
-          <h2 class="text-3xl sm:text-4xl font-bold mt-4">
-            Built to make business
-            <span class="gradient-text">easier.</span>
+          <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-5 leading-tight">
+            Built to make business <span class="gradient-text">easier.</span>
           </h2>
-
         </div>
 
+        <div class="mt-14 grid md:grid-cols-3 gap-6">
 
-        <div class="mt-14 grid md:grid-cols-3 gap-5">
-
-          <div data-aos="fade-up" class="brand-card p-7 rounded-2xl">
-
-            <div class="flex gap-1 text-yellow-400">
-              ★★★★★
-            </div>
-
-            <p class="text-gray-400 mt-5 leading-relaxed">
-              "Having CRM, billing and marketing tools in one place
-              has made managing our daily operations much easier."
+          <div data-aos="fade-up" class="bento rounded-3xl p-8">
+            <i class="ri-double-quotes-l text-4xl text-brand-blue/25"></i>
+            <div class="text-yellow-400 mt-2">★★★★★</div>
+            <p class="text-slate-700 mt-4 leading-relaxed">
+              "Having CRM, billing and marketing tools in one place has made managing our daily operations much easier."
             </p>
-
-            <div class="flex items-center gap-3 mt-7">
-
-              <div class="h-10 w-10 rounded-full bg-indigo-500/20 flex items-center justify-center">
-                <i class="ri-user-line text-indigo-400"></i>
-              </div>
-
+            <div class="flex items-center gap-3 mt-7 pt-6 border-t border-slate-100">
+              <div class="h-11 w-11 rounded-full brand-button flex items-center justify-center"><i class="ri-user-line"></i></div>
               <div>
-                <h4 class="text-sm font-medium">Business Owner</h4>
-                <p class="text-xs text-gray-600">Retail Business</p>
+                <h4 class="text-sm font-semibold">Business Owner</h4>
+                <p class="text-xs text-slate-500">Retail Business</p>
               </div>
-
             </div>
-
           </div>
 
-
-          <div data-aos="fade-up" data-aos-delay="100" class="brand-card p-7 rounded-2xl">
-
-            <div class="flex gap-1 text-yellow-400">
-              ★★★★★
-            </div>
-
-            <p class="text-gray-400 mt-5 leading-relaxed">
-              "The AI features help us create content and respond
-              to customers without spending hours doing everything manually."
+          <div data-aos="fade-up" data-aos-delay="100" class="bento rounded-3xl p-8">
+            <i class="ri-double-quotes-l text-4xl text-brand-green/30"></i>
+            <div class="text-yellow-400 mt-2">★★★★★</div>
+            <p class="text-slate-700 mt-4 leading-relaxed">
+              "The AI features help us create content and respond to customers without spending hours doing everything manually."
             </p>
-
-            <div class="flex items-center gap-3 mt-7">
-
-              <div class="h-10 w-10 rounded-full bg-purple-500/20 flex items-center justify-center">
-                <i class="ri-user-line text-purple-400"></i>
-              </div>
-
+            <div class="flex items-center gap-3 mt-7 pt-6 border-t border-slate-100">
+              <div class="h-11 w-11 rounded-full brand-button flex items-center justify-center"><i class="ri-user-line"></i></div>
               <div>
-                <h4 class="text-sm font-medium">Marketing Manager</h4>
-                <p class="text-xs text-gray-600">Service Business</p>
+                <h4 class="text-sm font-semibold">Marketing Manager</h4>
+                <p class="text-xs text-slate-500">Service Business</p>
               </div>
-
             </div>
-
           </div>
 
-
-          <div data-aos="fade-up" data-aos-delay="200" class="brand-card p-7 rounded-2xl">
-
-            <div class="flex gap-1 text-yellow-400">
-              ★★★★★
-            </div>
-
-            <p class="text-gray-400 mt-5 leading-relaxed">
-              "The dashboard gives us a much clearer picture of
-              what's happening across the business."
+          <div data-aos="fade-up" data-aos-delay="200" class="bento rounded-3xl p-8">
+            <i class="ri-double-quotes-l text-4xl text-brand-blue/25"></i>
+            <div class="text-yellow-400 mt-2">★★★★★</div>
+            <p class="text-slate-700 mt-4 leading-relaxed">
+              "The dashboard gives us a much clearer picture of what's happening across the business."
             </p>
-
-            <div class="flex items-center gap-3 mt-7">
-
-              <div class="h-10 w-10 rounded-full bg-pink-500/20 flex items-center justify-center">
-                <i class="ri-user-line text-pink-400"></i>
-              </div>
-
+            <div class="flex items-center gap-3 mt-7 pt-6 border-t border-slate-100">
+              <div class="h-11 w-11 rounded-full brand-button flex items-center justify-center"><i class="ri-user-line"></i></div>
               <div>
-                <h4 class="text-sm font-medium">Business Manager</h4>
-                <p class="text-xs text-gray-600">Growing Company</p>
+                <h4 class="text-sm font-semibold">Business Manager</h4>
+                <p class="text-xs text-slate-500">Growing Company</p>
               </div>
-
             </div>
-
           </div>
 
         </div>
-
       </div>
-
     </section>
 
 
     <!-- =====================================================
          FAQ
     ====================================================== -->
-
-    <section id="faq" class="py-24">
-
+    <section id="faq" class="pb-24 lg:pb-28">
       <div class="max-w-3xl mx-auto px-4 sm:px-6">
 
         <div class="text-center" data-aos="fade-up">
-
-          <span class="text-sm text-indigo-400 font-medium">
-            FAQ
+          <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-mist text-brand-blue text-sm font-semibold">
+            <i class="ri-question-line"></i> FAQ
           </span>
-
-          <h2 class="text-3xl sm:text-4xl font-bold mt-4">
-            Frequently asked
-            <span class="gradient-text">questions.</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold mt-5">
+            Frequently asked <span class="gradient-text">questions.</span>
           </h2>
-
         </div>
-
 
         <div class="mt-12 space-y-3">
 
-          <!-- FAQ -->
-          <div
-            data-aos="fade-up"
-            class="faq-item border border-white/10 rounded-xl overflow-hidden"
-          >
-
-            <button
-              class="faq-btn w-full px-5 py-5 flex items-center justify-between text-left"
-            >
-              <span class="font-medium">
-                What is eManagerAI?
-              </span>
-
-              <i class="ri-add-line text-xl"></i>
+          <div data-aos="fade-up" class="faq-item bg-white border border-slate-200 rounded-2xl transition">
+            <button class="faq-btn w-full px-6 py-5 flex items-center justify-between gap-4 text-left" aria-expanded="false">
+              <span class="font-semibold">What is eManagerAI?</span>
+              <span class="faq-icon h-8 w-8 shrink-0 rounded-full bg-brand-mist text-brand-blue flex items-center justify-center"><i class="ri-add-line text-lg"></i></span>
             </button>
-
-            <div class="faq-content px-5 pb-5 text-sm text-gray-500 leading-relaxed">
-              eManagerAI is an AI-powered business management platform
-              that brings CRM, billing, marketing, reviews, analytics
-              and business automation into one place.
+            <div class="faq-content">
+              <div><div class="px-6 pb-6 text-sm text-slate-600 leading-relaxed">
+                eManagerAI is an AI-powered business management platform that brings CRM, billing, marketing, reviews, analytics and business automation into one place.
+              </div></div>
             </div>
-
           </div>
 
-
-          <div
-            data-aos="fade-up"
-            class="faq-item border border-white/10 rounded-xl overflow-hidden"
-          >
-
-            <button
-              class="faq-btn w-full px-5 py-5 flex items-center justify-between text-left"
-            >
-              <span class="font-medium">
-                Who can use eManagerAI?
-              </span>
-
-              <i class="ri-add-line text-xl"></i>
+          <div data-aos="fade-up" class="faq-item bg-white border border-slate-200 rounded-2xl transition">
+            <button class="faq-btn w-full px-6 py-5 flex items-center justify-between gap-4 text-left" aria-expanded="false">
+              <span class="font-semibold">Who can use eManagerAI?</span>
+              <span class="faq-icon h-8 w-8 shrink-0 rounded-full bg-brand-mist text-brand-blue flex items-center justify-center"><i class="ri-add-line text-lg"></i></span>
             </button>
-
-            <div class="faq-content px-5 pb-5 text-sm text-gray-500 leading-relaxed">
-              eManagerAI is designed for MSMEs, retailers, service
-              providers, agencies, professionals and growing businesses.
+            <div class="faq-content">
+              <div><div class="px-6 pb-6 text-sm text-slate-600 leading-relaxed">
+                eManagerAI is designed for MSMEs, retailers, service providers, agencies, professionals and growing businesses.
+              </div></div>
             </div>
-
           </div>
 
-
-          <div
-            data-aos="fade-up"
-            class="faq-item border border-white/10 rounded-xl overflow-hidden"
-          >
-
-            <button
-              class="faq-btn w-full px-5 py-5 flex items-center justify-between text-left"
-            >
-              <span class="font-medium">
-                Can I connect my existing business data?
-              </span>
-
-              <i class="ri-add-line text-xl"></i>
+          <div data-aos="fade-up" class="faq-item bg-white border border-slate-200 rounded-2xl transition">
+            <button class="faq-btn w-full px-6 py-5 flex items-center justify-between gap-4 text-left" aria-expanded="false">
+              <span class="font-semibold">Can I connect my existing business data?</span>
+              <span class="faq-icon h-8 w-8 shrink-0 rounded-full bg-brand-mist text-brand-blue flex items-center justify-center"><i class="ri-add-line text-lg"></i></span>
             </button>
-
-            <div class="faq-content px-5 pb-5 text-sm text-gray-500 leading-relaxed">
-              The platform can be designed with APIs and integrations
-              so existing systems and business services can be connected.
+            <div class="faq-content">
+              <div><div class="px-6 pb-6 text-sm text-slate-600 leading-relaxed">
+                The platform can be designed with APIs and integrations so existing systems and business services can be connected.
+              </div></div>
             </div>
-
           </div>
 
-
-          <div
-            data-aos="fade-up"
-            class="faq-item border border-white/10 rounded-xl overflow-hidden"
-          >
-
-            <button
-              class="faq-btn w-full px-5 py-5 flex items-center justify-between text-left"
-            >
-              <span class="font-medium">
-                Can I upgrade my plan later?
-              </span>
-
-              <i class="ri-add-line text-xl"></i>
+          <div data-aos="fade-up" class="faq-item bg-white border border-slate-200 rounded-2xl transition">
+            <button class="faq-btn w-full px-6 py-5 flex items-center justify-between gap-4 text-left" aria-expanded="false">
+              <span class="font-semibold">Can I upgrade my plan later?</span>
+              <span class="faq-icon h-8 w-8 shrink-0 rounded-full bg-brand-mist text-brand-blue flex items-center justify-center"><i class="ri-add-line text-lg"></i></span>
             </button>
-
-            <div class="faq-content px-5 pb-5 text-sm text-gray-500 leading-relaxed">
-              Yes. You can start with a smaller plan and upgrade as
-              your business grows.
+            <div class="faq-content">
+              <div><div class="px-6 pb-6 text-sm text-slate-600 leading-relaxed">
+                Yes. You can start with a smaller plan and upgrade as your business grows.
+              </div></div>
             </div>
+          </div>
 
+          <div data-aos="fade-up" class="faq-item bg-white border border-slate-200 rounded-2xl transition">
+            <button class="faq-btn w-full px-6 py-5 flex items-center justify-between gap-4 text-left" aria-expanded="false">
+              <span class="font-semibold">How can I contact the eManagerAI team?</span>
+              <span class="faq-icon h-8 w-8 shrink-0 rounded-full bg-brand-mist text-brand-blue flex items-center justify-center"><i class="ri-add-line text-lg"></i></span>
+            </button>
+            <div class="faq-content">
+              <div><div class="px-6 pb-6 text-sm text-slate-600 leading-relaxed">
+                Email us at <a href="mailto:care@referindia.co.in" class="text-brand-blue font-semibold hover:underline">care@referindia.co.in</a>
+                or call <a href="tel:+919702053758" class="text-brand-blue font-semibold hover:underline">+91 97020 53758</a>.
+              </div></div>
+            </div>
           </div>
 
         </div>
-
       </div>
-
     </section>
 
 
     <!-- =====================================================
-         CTA
+         CONTACT / CTA
     ====================================================== -->
-
-    <section id="contact" class="pb-24">
-
+    <section id="contact" class="pb-24 lg:pb-28">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div
-          data-aos="zoom-in"
-          class="relative overflow-hidden rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-indigo-500/15 via-purple-500/10 to-transparent p-8 sm:p-12 lg:p-16 text-center"
-        >
+        <div data-aos="zoom-in" class="navy-panel relative overflow-hidden rounded-[2rem]">
+          <div class="dot-pattern absolute inset-0 opacity-50"></div>
+          <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-blue/30 blur-[110px] rounded-full"></div>
 
-          <div class="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 bg-indigo-500/20 blur-[100px] rounded-full"></div>
+          <div class="relative grid lg:grid-cols-2 gap-12 p-7 sm:p-12 lg:p-16">
 
-          <div class="relative">
+            <!-- Left -->
+            <div>
+              <div class="h-14 w-14 rounded-2xl brand-button flex items-center justify-center text-2xl">
+                <i class="ri-sparkling-2-fill"></i>
+              </div>
 
-            <div class="h-14 w-14 mx-auto rounded-2xl bg-indigo-500 flex items-center justify-center text-2xl">
-              <i class="ri-sparkling-2-fill"></i>
+              <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-7 leading-tight">
+                Ready to run your business <span class="gradient-text-light">smarter?</span>
+              </h2>
+
+              <p class="text-white/70 mt-5 text-lg leading-relaxed max-w-lg">
+                Bring your business management, marketing and automation together with eManagerAI. Talk to our team and we'll help you get started.
+              </p>
+
+              <div class="mt-9 space-y-4">
+                <a href="mailto:care@referindia.co.in" class="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.07] border border-white/10 hover:bg-white/[0.12] transition group">
+                  <div class="h-12 w-12 shrink-0 rounded-xl bg-white/10 text-[#6db3ff] flex items-center justify-center text-2xl"><i class="ri-mail-send-line"></i></div>
+                  <div class="min-w-0">
+                    <p class="text-xs text-white/60">Email us</p>
+                    <p class="font-semibold truncate">care@referindia.co.in</p>
+                  </div>
+                  <i class="ri-arrow-right-up-line ml-auto text-white/50 group-hover:text-white transition"></i>
+                </a>
+
+                <a href="tel:+919702053758" class="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.07] border border-white/10 hover:bg-white/[0.12] transition group">
+                  <div class="h-12 w-12 shrink-0 rounded-xl bg-white/10 text-brand-green flex items-center justify-center text-2xl"><i class="ri-phone-line"></i></div>
+                  <div class="min-w-0">
+                    <p class="text-xs text-white/60">Call us</p>
+                    <p class="font-semibold">+91 97020 53758</p>
+                  </div>
+                  <i class="ri-arrow-right-up-line ml-auto text-white/50 group-hover:text-white transition"></i>
+                </a>
+              </div>
             </div>
 
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mt-7">
-              Ready to run your business
-              <span class="gradient-text">smarter?</span>
-            </h2>
+            <!-- Form -->
+            <div>
+              <form id="contactForm" class="rounded-3xl bg-white text-brand-navy p-6 sm:p-8 shadow-2xl space-y-4">
+                <div>
+                  <h3 class="font-display text-xl font-semibold">Get started today</h3>
+                  <p class="text-sm text-slate-500 mt-1">Fill in your details and we'll reach out.</p>
+                </div>
 
-            <p class="max-w-2xl mx-auto text-gray-400 mt-5">
-              Bring your business management, marketing and automation
-              together with eManagerAI.
-            </p>
+                <div>
+                  <label for="cf-name" class="text-xs font-semibold text-slate-600">Your name</label>
+                  <input id="cf-name" type="text" required placeholder="Full name"
+                    class="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-brand-blue focus:bg-white transition" />
+                </div>
 
-            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="cf-phone" class="text-xs font-semibold text-slate-600">Phone</label>
+                    <input id="cf-phone" type="tel" required placeholder="+91XXXXXXXXXX"
+                      class="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-brand-blue focus:bg-white transition" />
+                  </div>
+                  <div>
+                    <label for="cf-biz" class="text-xs font-semibold text-slate-600">Business type</label>
+                    <select id="cf-biz"
+                      class="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-brand-blue focus:bg-white transition">
+                      <option>Retail</option>
+                      <option>Agency</option>
+                      <option>Services</option>
+                      <option>Healthcare</option>
+                      <option>Professional</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
 
-              <a
-                href="#"
-                class="brand-button px-7 py-3.5 rounded-xl font-semibold hover:opacity-90 transition"
-              >
-                Get Started Today
-                <i class="ri-arrow-right-line ml-1"></i>
-              </a>
+                <div>
+                  <label for="cf-msg" class="text-xs font-semibold text-slate-600">How can we help?</label>
+                  <textarea id="cf-msg" rows="3" placeholder="Tell us about your business"
+                    class="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-brand-blue focus:bg-white transition resize-none"></textarea>
+                </div>
 
-              <a
-                href="#"
-                class="px-7 py-3.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
-              >
-                Talk to Sales
-              </a>
+                <button type="submit" class="brand-button w-full rounded-xl py-3.5 font-semibold">
+                  Send message <i class="ri-send-plane-fill ml-1"></i>
+                </button>
 
+                <p class="text-[11px] text-slate-400 text-center">
+                  This opens your email app with the message ready to send to care@referindia.co.in.
+                </p>
+              </form>
             </div>
 
           </div>
-
         </div>
-
       </div>
-
     </section>
 
   </main>
@@ -1642,283 +1235,190 @@ body,html{
   <!-- =====================================================
        FOOTER
   ====================================================== -->
-
   <footer class="border-t border-slate-200 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-12 gap-10">
 
         <!-- Brand -->
-        <div class="lg:col-span-2">
-
+        <div class="lg:col-span-4">
           <a href="#" class="flex items-center" aria-label="eManagerAI home">
-            <img
-              src="images/logo.jpeg"
-              alt="eManagerAI logo"
-              class="h-12 sm:h-14 w-auto object-contain"
-            />
+            <img src="images/logo.jpeg" alt="eManagerAI logo" class="h-12 sm:h-14 w-auto object-contain" />
           </a>
 
-          <p class="text-sm text-gray-600 max-w-sm mt-5 leading-relaxed">
-            AI-powered business management for modern MSMEs and
-            growing businesses.
+          <p class="text-sm text-slate-600 max-w-sm mt-5 leading-relaxed">
+            AI-powered business management for modern MSMEs and growing businesses.
           </p>
-
-
-          <!-- Social -->
-          <div class="flex gap-3 mt-6">
-
-            <a
-              href="#"
-              class="h-9 w-9 rounded-lg border border-slate-200 flex items-center justify-center text-gray-600 hover:text-white hover:bg-[var(--brand-blue)] transition"
-            >
-              <i class="ri-linkedin-fill"></i>
-            </a>
-
-            <a
-              href="#"
-              class="h-9 w-9 rounded-lg border border-slate-200 flex items-center justify-center text-gray-600 hover:text-white hover:bg-[var(--brand-green)] transition"
-            >
-              <i class="ri-instagram-line"></i>
-            </a>
-
-            <a
-              href="#"
-              class="h-9 w-9 rounded-lg border border-slate-200 flex items-center justify-center text-gray-600 hover:text-white hover:bg-[var(--brand-blue)] transition"
-            >
-              <i class="ri-facebook-fill"></i>
-            </a>
-
-            <a
-              href="#"
-              class="h-9 w-9 rounded-lg border border-slate-200 flex items-center justify-center text-gray-600 hover:text-white hover:bg-[var(--brand-green)] transition"
-            >
-              <i class="ri-twitter-x-line"></i>
-            </a>
-
-          </div>
-
         </div>
 
-
-        <!-- Product -->
-        <div>
-
-          <h3 class="font-semibold text-sm">
-            Product
-          </h3>
-
-          <div class="mt-5 space-y-3 text-sm text-gray-500">
-
-            <a href="#features" class="block  transition">
-              Features
-            </a>
-
-            <a href="#pricing" class="block  transition">
-              Pricing
-            </a>
-
-            <a href="#" class="block  transition">
-              Integrations
-            </a>
-
-            <a href="#" class="block  transition">
-              Updates
-            </a>
-
+        <!-- Quick Links -->
+        <div class="lg:col-span-2">
+          <h3 class="font-display font-semibold text-sm">Quick Links</h3>
+          <div class="mt-5 space-y-3 text-sm text-slate-600">
+            <a href="#" class="block hover:text-brand-blue transition">Home</a>
+            <a href="#features" class="block hover:text-brand-blue transition">Features</a>
+            <a href="#solutions" class="block hover:text-brand-blue transition">Solutions</a>
+            <a href="#industries" class="block hover:text-brand-blue transition">Industries</a>
+            <a href="#pricing" class="block hover:text-brand-blue transition">Pricing</a>
+            
           </div>
-
         </div>
-
 
         <!-- Solutions -->
-        <div>
-
-          <h3 class="font-semibold text-sm">
-            Solutions
-          </h3>
-
-          <div class="mt-5 space-y-3 text-sm text-gray-500">
-
-            <a href="#" class="block  transition">
-              CRM
-            </a>
-
-            <a href="#" class="block  transition">
-              Billing
-            </a>
-
-            <a href="#" class="block  transition">
-              Marketing
-            </a>
-
-            <a href="#" class="block  transition">
-              Analytics
-            </a>
-
+        <div class="lg:col-span-2">
+          <h3 class="font-display font-semibold text-sm">Solutions</h3>
+          <div class="mt-5 space-y-3 text-sm text-slate-600">
+            <a href="#features" class="block hover:text-brand-blue transition">CRM</a>
+            <a href="#features" class="block hover:text-brand-blue transition">Billing</a>
+            <a href="#features" class="block hover:text-brand-blue transition">Marketing</a>
+            <a href="#features" class="block hover:text-brand-blue transition">Analytics</a>
           </div>
-
         </div>
 
+        <!-- Contact -->
+        <div class="lg:col-span-4">
+          <h3 class="font-display font-semibold text-sm">Contact</h3>
 
-        <!-- Company -->
-        <div>
-
-          <h3 class="font-semibold text-sm">
-            Company
-          </h3>
-
-          <div class="mt-5 space-y-3 text-sm text-gray-500">
-
-            <a href="#" class="block  transition">
-              About
+          <div class="mt-5 space-y-3 text-sm">
+            <a href="tel:+919702053758" class="flex items-center gap-3 text-slate-700 hover:text-brand-blue transition">
+              <span class="h-9 w-9 shrink-0 rounded-lg bg-brand-mint text-brand-green flex items-center justify-center"><i class="ri-phone-line"></i></span>
+              +91 97020 53758
             </a>
-
-            <a href="#" class="block  transition">
-              Contact
+            <a href="mailto:care@referindia.co.in" class="flex items-center gap-3 text-slate-700 hover:text-brand-blue transition break-all">
+              <span class="h-9 w-9 shrink-0 rounded-lg bg-brand-mist text-brand-blue flex items-center justify-center"><i class="ri-mail-line"></i></span>
+              care@referindia.co.in
             </a>
-
-            <a href="#faq" class="block  transition">
-              FAQ
-            </a>
-
-            <a href="#" class="block  transition">
-              Privacy Policy
-            </a>
-
           </div>
 
+          <div class="flex gap-3 mt-6">
+            <a href="#" aria-label="LinkedIn" class="h-10 w-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:text-white hover:bg-brand-blue hover:border-brand-blue transition"><i class="ri-linkedin-fill"></i></a>
+            <a href="#" aria-label="Instagram" class="h-10 w-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:text-white hover:bg-brand-green hover:border-brand-green transition"><i class="ri-instagram-line"></i></a>
+            <a href="#" aria-label="Facebook" class="h-10 w-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:text-white hover:bg-brand-blue hover:border-brand-blue transition"><i class="ri-facebook-fill"></i></a>
+            <a href="#" aria-label="X" class="h-10 w-10 rounded-xl border border-slate-200 flex items-center justify-center text-slate-600 hover:text-white hover:bg-brand-green hover:border-brand-green transition"><i class="ri-twitter-x-line"></i></a>
+          </div>
         </div>
 
       </div>
 
-
-      <!-- Bottom -->
       <div class="mt-12 pt-7 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-
-        <p class="text-xs text-gray-600 text-center sm:text-left">
-          © 2026 eManagerAI. All rights reserved.
-        </p>
-
-        <p class="text-xs text-gray-600">
-          Built for smarter businesses.
-        </p>
-
+        <p class="text-xs text-slate-500 text-center sm:text-left">© 2026 eManagerAI. All rights reserved.</p>
+        <p class="text-xs text-slate-500">Built for smarter businesses.</p>
       </div>
 
     </div>
-
   </footer>
+
+
+  <!-- Floating WhatsApp button -->
+  <a href="https://wa.me/919702053758?text=Enquiry%20from%20website" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp"
+    class="fixed bottom-5 right-5 z-40 h-14 w-14 rounded-full bg-[#25D366] text-white flex items-center justify-center text-3xl shadow-lg hover:scale-110 transition animate-ring">
+    <i class="ri-whatsapp-fill"></i>
+  </a>
 
 
   <!-- =====================================================
        JAVASCRIPT
   ====================================================== -->
-
-  <!-- AOS -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
   <script>
-
-    /* =========================
-       AOS
-    ========================== */
-
+    /* AOS */
     AOS.init({
       duration: 800,
       once: true,
-      offset: 80,
-      easing: "ease-out-cubic"
+      offset: 70,
+      easing: "ease-out-cubic",
+      disable: window.matchMedia("(prefers-reduced-motion: reduce)").matches
     });
 
+    /* Navbar shadow on scroll */
+    const nav = document.getElementById("nav");
+    const onScrollShadow = () => nav.classList.toggle("scrolled", window.scrollY > 10);
+    onScrollShadow();
+    window.addEventListener("scroll", onScrollShadow, { passive: true });
 
-    /* =========================
-       MOBILE MENU
-    ========================== */
-
+    /* Mobile menu */
     const menuBtn = document.getElementById("menuBtn");
     const mobileMenu = document.getElementById("mobileMenu");
+    let menuOpenScrollY = 0;
+
+    function setMenu(open) {
+      mobileMenu.classList.toggle("hidden", !open);
+      menuBtn.setAttribute("aria-expanded", String(open));
+      menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      menuBtn.querySelector("i").className = open ? "ri-close-line" : "ri-menu-3-line";
+      if (open) menuOpenScrollY = window.scrollY;
+    }
 
     menuBtn.addEventListener("click", () => {
-
-      mobileMenu.classList.toggle("hidden");
-
-      const icon = menuBtn.querySelector("i");
-
-      if (mobileMenu.classList.contains("hidden")) {
-        icon.className = "ri-menu-3-line";
-      } else {
-        icon.className = "ri-close-line";
-      }
-
+      setMenu(mobileMenu.classList.contains("hidden"));
     });
-
-
-    /* Close Mobile Menu */
 
     document.querySelectorAll(".mobile-link").forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        mobileMenu.classList.add("hidden");
-
-        menuBtn.querySelector("i").className = "ri-menu-3-line";
-
-      });
-
+      link.addEventListener("click", () => setMenu(false));
     });
 
+    /* Close the mobile menu as soon as the page is scrolled */
     window.addEventListener("scroll", () => {
-      if (window.innerWidth < 1024 && !mobileMenu.classList.contains("hidden")) {
-        mobileMenu.classList.add("hidden");
-        menuBtn.querySelector("i").className = "ri-menu-3-line";
+      if (!mobileMenu.classList.contains("hidden") && Math.abs(window.scrollY - menuOpenScrollY) > 8) {
+        setMenu(false);
       }
     }, { passive: true });
 
-
-    /* =========================
-       FAQ
-    ========================== */
-
-    const faqButtons = document.querySelectorAll(".faq-btn");
-
-    faqButtons.forEach(button => {
-
-      button.addEventListener("click", () => {
-
-        const content = button.nextElementSibling;
-        const icon = button.querySelector("i");
-
-        document.querySelectorAll(".faq-content").forEach(item => {
-
-          if (item !== content) {
-            item.classList.remove("active");
-          }
-
-        });
-
-        document.querySelectorAll(".faq-btn i").forEach(item => {
-
-          if (item !== icon) {
-            item.className = "ri-add-line text-xl";
-          }
-
-        });
-
-
-        content.classList.toggle("active");
-
-        if (content.classList.contains("active")) {
-          icon.className = "ri-subtract-line text-xl";
-        } else {
-          icon.className = "ri-add-line text-xl";
-        }
-
-      });
-
+    /* Close when tapping outside */
+    document.addEventListener("click", (e) => {
+      if (!mobileMenu.classList.contains("hidden") && !nav.contains(e.target)) setMenu(false);
     });
 
+    /* FAQ */
+    document.querySelectorAll(".faq-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const item = button.closest(".faq-item");
+        const willOpen = !item.classList.contains("open");
+
+        document.querySelectorAll(".faq-item").forEach(other => {
+          other.classList.remove("open");
+          other.querySelector(".faq-btn").setAttribute("aria-expanded", "false");
+        });
+
+        if (willOpen) {
+          item.classList.add("open");
+          button.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+
+    /* Card spotlight follows cursor */
+    document.querySelectorAll(".bento").forEach(card => {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+        card.style.setProperty("--my", (e.clientY - r.top) + "px");
+      });
+    });
+
+    /* Contact form -> opens email app */
+    document.getElementById("contactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("cf-name").value.trim();
+      const phone = document.getElementById("cf-phone").value.trim();
+      const biz = document.getElementById("cf-biz").value;
+      const msg = document.getElementById("cf-msg").value.trim();
+
+      const subject = "eManagerAI enquiry from " + name;
+      const body =
+        "Name: " + name + "\n" +
+        "Phone: " + phone + "\n" +
+        "Business type: " + biz + "\n\n" +
+        (msg || "I'd like to know more about eManagerAI.");
+
+      window.location.href =
+        "mailto:care@referindia.co.in?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+      /* clear the form after sending */
+      e.target.reset();
+    });
   </script>
 
 </body>
