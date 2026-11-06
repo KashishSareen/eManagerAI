@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      AI CRM Software for Customer &amp; Lead Management | eManagerAI
+    </title>
+    <meta
+      name="description"
+      content="Organize customer records, track leads and manage follow-ups in one AI-powered CRM. Get a clearer view of every customer relationship with eManagerAI."
+    />
+    <meta
+      name="keywords"
+      content="AI CRM, customer management, lead tracking, follow-ups, eManagerAI"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#091628" />
+    <meta
+      property="og:title"
+      content="AI CRM Software for Customer &amp; Lead Management | eManagerAI"
+    />
+    <meta
+      property="og:description"
+      content="Organize customer records, track leads and manage follow-ups in one AI-powered CRM."
+    />
+    <meta property="og:image" content="/images/ai-crm.jpg" />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/feature-pages.css" />
+  </head>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+            display: ["Sora", '"Plus Jakarta Sans"', "system-ui", "sans-serif"],
+          },
+          colors: {
+            brand: {
+              blue: "#0d6ed9",
+              green: "#1dbb73",
+              navy: "#091628",
+              ink: "#0f1f38",
+              mist: "#f3f8ff",
+              mint: "#effaf5",
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <body class="antialiased">
+        <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+    <header class="fixed inset-x-0 top-0 z-50">
+      <nav id="nav" class="glass" aria-label="Main navigation">
+        <div
+          class="mx-auto flex h-[72px] max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8"
+        >
+          <a href="/index.html" aria-label="eManagerAI home">
+            <img
+              src="/images/logo.jpeg"
+              alt="eManagerAI logo"
+              class="h-11 w-auto sm:h-14 rounded-xl"
+              width="160"
+              height="56"
+              loading="eager"
+            />
+          </a>
+          <div class="hidden items-center gap-1 text-sm font-medium lg:flex">
+            <a
+              href="/index.html"
+              class="rounded-lg px-4 py-2 text-slate-600 hover:bg-brand-mist hover:text-brand-blue"
+              >Home</a
+            >
+            <a
+              href="/index.html#features"
+              class="rounded-lg px-4 py-2 text-brand-blue"
+              >Services</a
+            >
+            <a
+              href="/index.html#solutions"
+              class="rounded-lg px-4 py-2 text-slate-600 hover:bg-brand-mist hover:text-brand-blue"
+              >AI Assistant</a
+            >
+            <a
+              href="/index.html#businesses"
+              class="rounded-lg px-4 py-2 text-slate-600 hover:bg-brand-mist hover:text-brand-blue"
+              >Businesses</a
+            >
+            <a
+              href="/index.html#pricing"
+              class="rounded-lg px-4 py-2 text-slate-600 hover:bg-brand-mist hover:text-brand-blue"
+              >Pricing</a
+            >
+            <a
+              href="/index.html#contact"
+              class="rounded-lg px-4 py-2 text-slate-600 hover:bg-brand-mist hover:text-brand-blue"
+              >Contact</a
+            >
+          </div>
+          <div class="hidden md:block">
+            <a
+              href="tel:+919702053758"
+              class="brand-button inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold"
+            >
+              <i class="ri-phone-fill"></i> Get in touch
+            </a>
+          </div>
+          <button
+            id="menuBtn"
+            class="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-2xl lg:hidden"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobileMenu"
+          >
+            <i class="ri-menu-3-line"></i>
+          </button>
+        </div>
+        <div
+          id="mobileMenu"
+          class="hidden border-t border-slate-100 bg-white lg:hidden"
+        >
+          <div class="flex flex-col gap-1 px-5 py-5">
+            <a
+              href="/index.html"
+              class="rounded-lg px-3 py-3 font-medium text-slate-700 hover:bg-brand-mist"
+              >Home</a
+            >
+            <a
+              href="/index.html#features"
+              class="rounded-lg px-3 py-3 font-medium text-brand-blue hover:bg-brand-mist"
+              >Services</a
+            >
+            <a
+              href="/index.html#solutions"
+              class="rounded-lg px-3 py-3 font-medium text-slate-700 hover:bg-brand-mist"
+              >AI Assistant</a
+            >
+            <a
+              href="/index.html#businesses"
+              class="rounded-lg px-3 py-3 font-medium text-slate-700 hover:bg-brand-mist"
+              >Businesses</a
+            >
+            <a
+              href="/index.html#pricing"
+              class="rounded-lg px-3 py-3 font-medium text-slate-700 hover:bg-brand-mist"
+              >Pricing</a
+            >
+            <a
+              href="/index.html#contact"
+              class="rounded-lg px-3 py-3 font-medium text-slate-700 hover:bg-brand-mist"
+              >Contact</a
+            >
+            <a
+              href="tel:+919702053758"
+              class="brand-button mt-3 rounded-xl py-3.5 text-center text-sm font-semibold"
+              ><i class="ri-phone-fill"></i> Get in touch</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- =====================================================
+           HERO
+      ====================================================== -->
+      <section
+        class="feature-hero overflow-hidden pb-16 pt-32 sm:pb-20 sm:pt-40"
+      >
+        <div
+          class="mx-auto grid max-w-7xl min-w-0 items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8"
+        >
+          <div data-aos="fade-up" class="min-w-0">
+            <a
+              href="/index.html#features"
+              class="text-sm font-semibold text-brand-blue hover:underline"
+            >
+              <i class="ri-arrow-left-line"></i> All services
+            </a>
+            <p
+              class="mt-7 text-sm font-semibold uppercase tracking-wider text-brand-blue"
+            >
+              Customer relationships, made clearer
+            </p>
+            <h1
+              class="mt-4 font-display text-4xl font-bold leading-tight text-brand-navy sm:text-5xl lg:text-6xl"
+            >
+              AI CRM for stronger customer relationships
+            </h1>
+            <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">
+              Keep customer details, leads, conversations and next steps
+              together. eManagerAI helps your team stay organized and follow up
+              with confidence.
+            </p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="/index.html#contact"
+                class="brand-button inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 font-semibold"
+              >
+                Talk to our team <i class="ri-arrow-right-line"></i>
+              </a>
+              <a
+                href="/index.html#pricing"
+                class="ghost-button inline-flex items-center justify-center rounded-xl px-6 py-3.5 font-semibold"
+                >View plans</a
+              >
+            </div>
+          </div>
+          <div
+            data-aos="fade-left"
+            class="feature-image-frame relative min-w-0 overflow-hidden rounded-3xl shadow-xl"
+          >
+            <img
+              src="/images/ai-crm.jpg"
+              alt="Team reviewing customer relationships and a sales pipeline"
+              class="aspect-[4/3]"
+              width="800"
+              height="600"
+              loading="lazy"
+              decoding="async"
+            />
+            <div
+              class="absolute inset-x-3 bottom-3 rounded-2xl border border-white/60 bg-white/95 p-4 shadow-lg backdrop-blur sm:inset-x-5 sm:bottom-5 sm:p-5"
+            >
+              <p
+                class="text-xs font-semibold uppercase tracking-wide text-brand-blue"
+              >
+                A more connected workflow
+              </p>
+              <p class="mt-1 text-sm font-semibold text-slate-800 sm:text-base">
+                Customer details · Lead progress · Follow-up reminders
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           STATS
+      ====================================================== -->
+      <section class="navy-panel relative">
+        <div class="dot-pattern absolute inset-0 opacity-60"></div>
+        <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <div
+            class="grid grid-cols-2 gap-y-9 gap-x-6 text-center md:grid-cols-4"
+          >
+            <div data-aos="fade-up">
+              <h3
+                class="font-display text-3xl font-bold gradient-text-light sm:text-4xl"
+              >
+                1 view
+              </h3>
+              <p class="mt-2 text-sm text-white/70">Of every customer</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="100">
+              <h3
+                class="font-display text-3xl font-bold gradient-text-light sm:text-4xl"
+              >
+                Leads
+              </h3>
+              <p class="mt-2 text-sm text-white/70">Tracked end to end</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+              <h3
+                class="font-display text-3xl font-bold gradient-text-light sm:text-4xl"
+              >
+                Follow-ups
+              </h3>
+              <p class="mt-2 text-sm text-white/70">Never missed</p>
+            </div>
+            <div data-aos="fade-up" data-aos-delay="300">
+              <h3
+                class="font-display text-3xl font-bold gradient-text-light sm:text-4xl"
+              >
+                AI
+              </h3>
+              <p class="mt-2 text-sm text-white/70">Smart assistance</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           KEY BENEFITS
+      ====================================================== -->
+      <section class="py-16 sm:py-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div data-aos="fade-up" class="max-w-2xl">
+            <p class="font-semibold text-brand-green">
+              One view, fewer loose ends
+            </p>
+            <h2 class="mt-3 font-display text-3xl font-bold sm:text-4xl">
+              Make every customer conversation easier to manage
+            </h2>
+            <p class="mt-4 leading-relaxed text-slate-600">
+              Bring the everyday work of customer management into a shared
+              space, so your team can spend less time searching and more time
+              building relationships.
+            </p>
+          </div>
+          <div class="mt-10 grid gap-5 md:grid-cols-3">
+            <article data-aos="fade-up" class="bento rounded-3xl p-7">
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-blue/10 text-2xl text-brand-blue"
+                ><i class="ri-contacts-line"></i
+              ></span>
+              <h3 class="mt-5 text-lg font-bold">Customer context at hand</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                Keep contact information and interaction context organized, so
+                your team can pick up where the last conversation left off.
+              </p>
+            </article>
+            <article
+              data-aos="fade-up"
+              data-aos-delay="100"
+              class="bento rounded-3xl p-7"
+            >
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-mint text-2xl text-brand-green"
+                ><i class="ri-flow-chart"></i
+              ></span>
+              <h3 class="mt-5 text-lg font-bold">A clearer lead pipeline</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                See where enquiries stand and understand which leads need
+                attention, from first contact through follow-up.
+              </p>
+            </article>
+            <article
+              data-aos="fade-up"
+              data-aos-delay="200"
+              class="bento rounded-3xl p-7"
+            >
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-mist text-2xl text-brand-blue"
+                ><i class="ri-calendar-check-line"></i
+              ></span>
+              <h3 class="mt-5 text-lg font-bold">Consistent follow-ups</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-600">
+                Make next steps easier to track and help your team deliver
+                timely, attentive customer service.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           WHY IT HELPS
+      ====================================================== -->
+      <section
+        class="bg-gradient-to-b from-brand-mist/70 to-white py-16 sm:py-20"
+      >
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="grid items-center gap-12 lg:grid-cols-2">
+            <div data-aos="fade-right">
+              <span
+                class="inline-flex items-center gap-2 rounded-full bg-white border border-slate-200 px-3.5 py-1.5 text-sm font-semibold text-brand-blue shadow-sm"
+              >
+                <i class="ri-flashlight-line"></i> Built for busy teams
+              </span>
+              <h2
+                class="mt-5 font-display text-3xl font-bold leading-tight sm:text-4xl"
+              >
+                Everything your team needs to
+                <span class="gradient-text">stay close to customers.</span>
+              </h2>
+              <p class="mt-4 text-lg leading-relaxed text-slate-600">
+                From first enquiry to long-term relationship, AI CRM keeps the
+                important details in one place so nothing slips through.
+              </p>
+              <ul class="mt-8 space-y-4">
+                <li class="flex gap-3 text-sm text-slate-700">
+                  <i
+                    class="ri-checkbox-circle-fill text-lg text-brand-green"
+                  ></i>
+                  Centralized customer and lead records
+                </li>
+                <li class="flex gap-3 text-sm text-slate-700">
+                  <i
+                    class="ri-checkbox-circle-fill text-lg text-brand-green"
+                  ></i>
+                  Pipeline stages you can actually follow
+                </li>
+                <li class="flex gap-3 text-sm text-slate-700">
+                  <i
+                    class="ri-checkbox-circle-fill text-lg text-brand-green"
+                  ></i>
+                  Reminders that keep follow-ups on time
+                </li>
+                <li class="flex gap-3 text-sm text-slate-700">
+                  <i
+                    class="ri-checkbox-circle-fill text-lg text-brand-green"
+                  ></i>
+                  Works alongside billing, reviews and analytics
+                </li>
+              </ul>
+            </div>
+            <div
+              data-aos="fade-left"
+              class="rounded-3xl border border-brand-blue/10 bg-white p-6 shadow-sm sm:p-8"
+            >
+              <div
+                class="flex items-center justify-between text-[11px] font-semibold text-slate-500"
+              >
+                <span>Lead pipeline</span><span>This week</span>
+              </div>
+              <div class="mt-4 space-y-3">
+                <div
+                  class="flex items-center gap-3 rounded-xl bg-brand-mist px-3 py-3"
+                >
+                  <div
+                    class="flex h-9 w-9 items-center justify-center rounded-full bg-brand-blue/15 text-xs font-bold text-brand-blue"
+                  >
+                    RS
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <p class="truncate text-sm font-semibold">Rohit Sharma</p>
+                    <p class="text-[11px] text-slate-500">Follow-up today</p>
+                  </div>
+                  <span
+                    class="rounded-md bg-brand-mint px-2 py-1 text-[10px] font-semibold text-brand-green"
+                    >Hot</span
+                  >
+                </div>
+                <div
+                  class="flex items-center gap-3 rounded-xl border border-slate-100 px-3 py-3"
+                >
+                  <div
+                    class="flex h-9 w-9 items-center justify-center rounded-full bg-brand-green/15 text-xs font-bold text-brand-green"
+                  >
+                    AK
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <p class="truncate text-sm font-semibold">Anjali Kapoor</p>
+                    <p class="text-[11px] text-slate-500">Quote sent</p>
+                  </div>
+                  <span
+                    class="rounded-md bg-brand-blue/10 px-2 py-1 text-[10px] font-semibold text-brand-blue"
+                    >Warm</span
+                  >
+                </div>
+                <div
+                  class="flex items-center gap-3 rounded-xl border border-slate-100 px-3 py-3"
+                >
+                  <div
+                    class="flex h-9 w-9 items-center justify-center rounded-full bg-slate-200 text-xs font-bold text-slate-600"
+                  >
+                    MV
+                  </div>
+                  <div class="min-w-0 flex-1">
+                    <p class="truncate text-sm font-semibold">Mehta Ventures</p>
+                    <p class="text-[11px] text-slate-500">New enquiry</p>
+                  </div>
+                  <span
+                    class="rounded-md bg-slate-100 px-2 py-1 text-[10px] font-semibold text-slate-600"
+                    >New</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           RELATED SERVICES
+      ====================================================== -->
+      <section class="py-16 sm:py-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div data-aos="fade-up" class="text-center max-w-2xl mx-auto">
+            <h2 class="font-display text-3xl font-bold sm:text-4xl">
+              Explore more <span class="gradient-text">services</span>
+            </h2>
+            <p class="mt-4 text-slate-600">
+              AI CRM works even better with the rest of the eManagerAI platform.
+            </p>
+          </div>
+          <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <a
+              href="/smart-billing.html"
+              data-aos="fade-up"
+              class="bento flex items-center gap-4 rounded-2xl p-5"
+            >
+              <span
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-green/10 text-xl text-brand-green"
+                ><i class="ri-file-list-3-line"></i
+              ></span>
+              <div>
+                <p class="font-semibold">Smart Billing</p>
+                <p class="text-xs text-slate-500">Invoices &amp; payments</p>
+              </div>
+            </a>
+            <a
+              href="/social-automation.html"
+              data-aos="fade-up"
+              data-aos-delay="60"
+              class="bento flex items-center gap-4 rounded-2xl p-5"
+            >
+              <span
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-pink-500/10 text-xl text-pink-500"
+                ><i class="ri-instagram-line"></i
+              ></span>
+              <div>
+                <p class="font-semibold">Social Automation</p>
+                <p class="text-xs text-slate-500">Content &amp; posting</p>
+              </div>
+            </a>
+            <a
+              href="/google-business.html"
+              data-aos="fade-up"
+              data-aos-delay="120"
+              class="bento flex items-center gap-4 rounded-2xl p-5"
+            >
+              <span
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-red-500/10 text-xl text-red-500"
+                ><i class="ri-google-line"></i
+              ></span>
+              <div>
+                <p class="font-semibold">Google Business</p>
+                <p class="text-xs text-slate-500">Local presence</p>
+              </div>
+            </a>
+            <a
+              href="/review-management.html"
+              data-aos="fade-up"
+              data-aos-delay="180"
+              class="bento flex items-center gap-4 rounded-2xl p-5"
+            >
+              <span
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-yellow-500/10 text-xl text-yellow-500"
+                ><i class="ri-star-smile-line"></i
+              ></span>
+              <div>
+                <p class="font-semibold">Review Management</p>
+                <p class="text-xs text-slate-500">AI review replies</p>
+              </div>
+            </a>
+            <a
+              href="/business-analytics.html"
+              data-aos="fade-up"
+              data-aos-delay="240"
+              class="bento flex items-center gap-4 rounded-2xl p-5"
+            >
+              <span
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue/10 text-xl text-brand-blue"
+                ><i class="ri-bar-chart-box-line"></i
+              ></span>
+              <div>
+                <p class="font-semibold">Business Analytics</p>
+                <p class="text-xs text-slate-500">Clearer decisions</p>
+              </div>
+            </a>
+            <a
+              href="/index.html#pricing"
+              data-aos="fade-up"
+              data-aos-delay="300"
+              class="bento flex items-center gap-4 rounded-2xl p-5"
+            >
+              <span
+                class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-mint text-xl text-brand-green"
+                ><i class="ri-price-tag-3-line"></i
+              ></span>
+              <div>
+                <p class="font-semibold">View Pricing</p>
+                <p class="text-xs text-slate-500">Plans that grow with you</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           CTA
+      ====================================================== -->
+      <section class="pb-20 sm:pb-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div
+            data-aos="zoom-in"
+            class="navy-panel relative overflow-hidden rounded-[2rem]"
+          >
+            <div class="dot-pattern absolute inset-0 opacity-50"></div>
+            <div
+              class="relative flex flex-col items-start justify-between gap-7 p-8 sm:p-12 md:flex-row md:items-center"
+            >
+              <div>
+                <p class="font-semibold text-[#6db3ff]">
+                  Get started with eManagerAI
+                </p>
+                <h2
+                  class="mt-2 max-w-2xl font-display text-3xl font-bold sm:text-4xl"
+                >
+                  Ready to bring customer management together?
+                </h2>
+                <p class="mt-3 max-w-2xl leading-relaxed text-white/70">
+                  Talk with our team about a CRM workflow that fits your
+                  business.
+                </p>
+              </div>
+              <a
+                href="/index.html#contact"
+                class="brand-button inline-flex shrink-0 items-center gap-2 rounded-xl px-6 py-3.5 font-semibold"
+              >
+                Get in touch <i class="ri-arrow-right-line"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+    <footer class="border-t border-slate-200 bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
+          <div class="lg:col-span-4">
+            <a
+              href="/index.html"
+              class="flex items-center"
+              aria-label="eManagerAI home"
+            >
+              <img
+                src="/images/logo.jpeg"
+                alt="eManagerAI logo"
+                class="h-12 w-auto object-contain sm:h-14 rounded-xl"
+                width="160"
+                height="56"
+                loading="lazy"
+              />
+            </a>
+            <p class="mt-5 max-w-sm text-sm leading-relaxed text-slate-600">
+              AI-powered business management for modern MSMEs and growing
+              businesses.
+            </p>
+          </div>
+          <div class="lg:col-span-2">
+            <h3 class="font-display text-sm font-semibold">Quick Links</h3>
+            <div class="mt-5 space-y-3 text-sm text-slate-600">
+              <a
+                href="/index.html"
+                class="block transition hover:text-brand-blue"
+                >Home</a
+              >
+              <a
+                href="/index.html#features"
+                class="block transition hover:text-brand-blue"
+                >Services</a
+              >
+              <a
+                href="/index.html#solutions"
+                class="block transition hover:text-brand-blue"
+                >AI Assistant</a
+              >
+              <a
+                href="/index.html#businesses"
+                class="block transition hover:text-brand-blue"
+                >Businesses</a
+              >
+              <a
+                href="/index.html#pricing"
+                class="block transition hover:text-brand-blue"
+                >Pricing</a
+              >
+              <a
+                href="/index.html#contact"
+                class="block transition hover:text-brand-blue"
+                >Contact</a
+              >
+            </div>
+          </div>
+          <div class="lg:col-span-2">
+            <h3 class="font-display text-sm font-semibold">Services</h3>
+            <div class="mt-5 space-y-3 text-sm text-slate-600">
+              <a
+                href="/ai-crm.html"
+                class="block transition hover:text-brand-blue"
+                >AI CRM</a
+              >
+              <a
+                href="/smart-billing.html"
+                class="block transition hover:text-brand-blue"
+                >Smart Billing</a
+              >
+              <a
+                href="/social-automation.html"
+                class="block transition hover:text-brand-blue"
+                >Social Automation</a
+              >
+              <a
+                href="/google-business.html"
+                class="block transition hover:text-brand-blue"
+                >Google Business</a
+              >
+              <a
+                href="/review-management.html"
+                class="block transition hover:text-brand-blue"
+                >Review Management</a
+              >
+              <a
+                href="/business-analytics.html"
+                class="block transition hover:text-brand-blue"
+                >Business Analytics</a
+              >
+            </div>
+          </div>
+          <div class="lg:col-span-4">
+            <h3 class="font-display text-sm font-semibold">Contact</h3>
+            <div class="mt-5 space-y-3 text-sm">
+              <a
+                href="tel:+919702053758"
+                class="flex items-center gap-3 text-slate-700 transition hover:text-brand-blue"
+              >
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-mint text-brand-green"
+                  ><i class="ri-phone-line"></i
+                ></span>
+                +91 97020 53758
+              </a>
+              <a
+                href="mailto:care@referindia.co.in"
+                class="flex items-center gap-3 break-all text-slate-700 transition hover:text-brand-blue"
+              >
+                <span
+                  class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-brand-mist text-brand-blue"
+                  ><i class="ri-mail-line"></i
+                ></span>
+                care@referindia.co.in
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-7 sm:flex-row"
+        >
+          <p class="text-center text-xs text-slate-500 sm:text-left">
+            © 2026 eManagerAI. All rights reserved.
+          </p>
+          <p class="text-xs text-slate-500">Built for smarter businesses.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp button -->
+    <a
+      href="https://wa.me/919702053758?text=Enquiry%20from%20website"
+      target="_blank"
+      rel="noopener"
+      aria-label="Chat with us on WhatsApp"
+      class="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-3xl text-white shadow-lg transition hover:scale-110"
+    >
+      <i class="ri-whatsapp-fill"></i>
+    </a>
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="/feature-pages.js"></script>
+  </body>
+</html>
