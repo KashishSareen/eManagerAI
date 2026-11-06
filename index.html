@@ -1226,13 +1226,10 @@
                     class="mt-1.5 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-brand-blue focus:bg-white transition resize-none"></textarea>
                 </div>
 
-                <button type="submit" class="brand-button w-full rounded-xl py-3.5 font-semibold">
-                  Send message <i class="ri-send-plane-fill ml-1"></i>
-                </button>
+               <a href="/form/appointment-form" class="brand-button w-full rounded-xl py-3.5 font-semibold text-center block">
+  Send message <i class="ri-send-plane-fill ml-1"></i>
+</a>
 
-                <p class="text-[11px] text-slate-400 text-center">
-                  This opens your email app with the message ready to send to care@referindia.co.in.
-                </p>
               </form>
             </div>
 
@@ -1404,28 +1401,9 @@
       });
     });
 
-    /* Contact form -> opens email app */
-    document.getElementById("contactForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const name = document.getElementById("cf-name").value.trim();
-      const phone = document.getElementById("cf-phone").value.trim();
-      const biz = document.getElementById("cf-biz").value;
-      const msg = document.getElementById("cf-msg").value.trim();
-
-      const subject = "eManagerAI enquiry from " + name;
-      const body =
-        "Name: " + name + "\n" +
-        "Phone: " + phone + "\n" +
-        "Business type: " + biz + "\n\n" +
-        (msg || "I'd like to know more about eManagerAI.");
-
-      window.location.href =
-        "mailto:care@referindia.co.in?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body);
-
-      /* clear the form after sending */
-      e.target.reset();
-    });
+    /* Clear the contact form when returning to this page */
+    const contactForm = document.getElementById("contactForm");
+    window.addEventListener("pageshow", () => contactForm.reset());
   </script>
 
 </body>
